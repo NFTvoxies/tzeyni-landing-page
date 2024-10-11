@@ -23,11 +23,6 @@ export default function Home() {
       <Testimonial />
       <Newsletter />
       <Footer />
-      <div className="footer-bottom">
-        <p className="footer-company-name">
-          Copyright © 2024 <strong>TZEYNI</strong> tous droits réservés
-        </p>
-      </div>
     </>
   );
 }
