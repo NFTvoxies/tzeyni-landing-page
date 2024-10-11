@@ -24,7 +24,7 @@ const ContactForm = () => {
     <div className="py-16 px-4 mx-auto max-w-screen-xl sm:py-24 lg:px-6">
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-8 p-6 mx-auto mb-16 max-w-screen-md bg-white rounded-lg border border-gray-200 shadow-sm lg:mb-28 sm:grid-cols-2">
         <div>
-          <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+          <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">Prénom</label>
           <input
             type="text"
             id="firstName"
@@ -37,7 +37,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+          <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900">Nom de famille</label>
           <input
             type="text"
             id="lastName"
@@ -50,7 +50,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Votre email</label>
           <input
             type="email"
             id="email"
@@ -63,7 +63,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
+          <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900">Numéro de téléphone</label>
           <input
             type="tel"
             id="phoneNumber"
@@ -76,7 +76,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="sm:col-span-2">
-          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">Votre message</label>
           <textarea
             id="message"
             name="message"
@@ -87,7 +87,7 @@ const ContactForm = () => {
             placeholder="Leave a comment..."
           ></textarea>
         </div>
-        <button type="submit" className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#aa9270] sm:w-fit hover:bg-[#8e7a5d] focus:ring-4 focus:outline-none focus:ring-[#d4bd9c]">Send message</button>
+        <button type="submit" className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#aa9270] sm:w-fit hover:bg-[#8e7a5d] focus:ring-4 focus:outline-none focus:ring-[#d4bd9c]">Envoyer un message</button>
       </form>
     </div>
   );

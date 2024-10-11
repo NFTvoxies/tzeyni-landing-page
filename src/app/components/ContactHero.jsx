@@ -30,7 +30,7 @@ const ContactHero = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-gray-200 max-w-2xl ">
-            We're here to help. Reach out to us for any questions, concerns, or feedback.
+          Nous sommes là pour vous aider. N'hésitez pas à nous contacter si vous avez des questions, des préoccupations ou des commentaires.
           </p>
         </div>
       </div>
