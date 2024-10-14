@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isRouteHome, setIsRouteHome] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,20 +16,25 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsRouteHome(window.location.pathname === '/home' || window.location.pathname === '/');
+  }, []);
+
   const navLinks = [
-    { href: '#', label: 'Accueil' },
-    { href: '#', label: 'À propos' },
-    { href: '#', label: 'Services' },
-    { href: '#', label: 'FAQ' },
-    { href: '#', label: 'Contact' },
+    { href: '/home', label: 'Accueil' },
+    { href: '/about', label: 'À propos' },
+    { href: '/service', label: 'Services' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/auth/login', label: 'Connexion' },
   ];
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/75 backdrop-blur-sm shadow-md' : 'bg-transparent'
-    }`}>
+      isRouteHome ? 'bg-transparent' : 'bg-black/75 backdrop-blur-sm shadow-md' 
+    } ${isScrolled ? 'bg-black/75 backdrop-blur-sm shadow-md' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image 
