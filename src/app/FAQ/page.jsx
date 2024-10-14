@@ -1,8 +1,6 @@
 // src/app/contact/page.jsx
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import ContactHero from "../components/ContactHero";
-import ContactForm from "../components/ContactForm";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 
