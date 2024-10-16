@@ -1,6 +1,6 @@
 // src/app/contact/page.jsx
 import Head from "next/head";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 

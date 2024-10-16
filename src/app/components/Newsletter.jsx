@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '../../components/ui/alert';
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');

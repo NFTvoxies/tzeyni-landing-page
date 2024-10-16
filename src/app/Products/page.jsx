@@ -1,11 +1,12 @@
 import Head from "next/head";
-import Navbar from "../components/Navbar";
-import ProductList from "../components/ProductList";
+import Navbar from "../components/navbar";
+import ProducstList from "../components/ProductsList";
 import ProductFilter from "../components/ProductFilter";
 import Footer from "../components/Footer";
 
 const products = [
   {
+    id:1,
     name: "Apple iMac 27\"",
     description: "Apple M3 Octa Core, 27-inch Retina 5K display, RAM 8GB, SSD 256GB.",
     price: "$1,799",
@@ -17,6 +18,7 @@ const products = [
     ],
   },
   {
+    id:2,
     name: "Samsung Galaxy S21",
     description: "6.2-inch display, 128GB storage, triple camera setup, 4000mAh battery.",
     price: "$799",
@@ -27,6 +29,7 @@ const products = [
     ],
   },
   {
+    id:3,
     name: "Sony WH-1000XM4 Headphones",
     description: "Industry-leading noise cancellation, up to 30 hours of battery life, touch sensor controls.",
     price: "$348",
@@ -37,6 +40,7 @@ const products = [
     ],
   },
   {
+    id:4,
     name: "Apple MacBook Pro 14\"",
     description: "Apple M1 Pro chip, 16GB RAM, 512GB SSD, Liquid Retina XDR display.",
     price: "$1,999",
@@ -47,6 +51,7 @@ const products = [
     ],
   },
   {
+    id:5,
     name: "Nikon D5600 Camera",
     description: "24.2MP DSLR, Full HD video recording, 3.2-inch touchscreen, built-in Wi-Fi.",
     price: "$699",
@@ -57,6 +62,7 @@ const products = [
     ],
   },
   {
+    id:5,
     name: "Fitbit Charge 5",
     description: "Fitness tracker with built-in GPS, heart rate monitor, sleep tracking.",
     price: "$179",
@@ -101,7 +107,7 @@ export default function Products() {
           <div className="flex flex-wrap mt-5">
             {products.map((product, index) => (
               <div className="w-full sm:w-1/2 lg:w-1/3 p-2" key={index}>
-                <ProductList product={product} />
+                <ProducstList id={product.id} product={product} />
               </div>
             ))}
           </div>

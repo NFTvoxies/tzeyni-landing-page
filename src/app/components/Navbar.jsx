@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../../components/ui/sheet"
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,7 +24,7 @@ const Navbar = () => {
     { href: '/home', label: 'Accueil' },
     { href: '/about', label: 'À propos' },
     { href: '/service', label: 'Services' },
-    { href: '/faq', label: 'FAQ' },
+    { href: '/FAQ', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
     { href: '/auth/login', label: 'Connexion' },
   ];
