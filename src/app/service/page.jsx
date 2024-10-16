@@ -1,6 +1,6 @@
 // src/app/services/page.jsx
 import Head from "next/head";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 import ServicesList from "../components/ServicesList";
 import ServiceFilter from "../components/ServiceFilter";
 import Footer from "../components/Footer";
