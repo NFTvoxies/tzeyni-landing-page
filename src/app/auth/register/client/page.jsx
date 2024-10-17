@@ -1,4 +1,4 @@
-import Register from "@/app/components/register";
+import RegisterClient from "@/app/components/registerClient";
 
 
 
@@ -8,5 +8,5 @@ export const metadata = {
 };
 
 export default async function LoginPage() {
-  return <Register />;
+  return <RegisterClient />;
 }

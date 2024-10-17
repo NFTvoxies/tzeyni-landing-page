@@ -7,6 +7,8 @@ import { useParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Controller, useForm } from 'react-hook-form'
 import { Icon } from '@iconify/react'
+import toast from 'react-hot-toast'
+import axios from '../../axios'
 
 const Register = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
@@ -35,32 +37,43 @@ const Register = () => {
 
   const handleClickShowPassword = () => setIsPasswordShown(!isPasswordShown)
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
-      setError("Passwords don't match")
-      return
+      setError("Passwords don't match");
+      return;
     }
+
+    setError("");
 
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+      const response = await axios.post("/api/professional/register", {
+        full_name: data.full_name,
+        gender: data.gender,
+        email: data.email,
+        phone: data.phone,
+        city: data.city,
+        addresse: data.addresse,
+        password: data.password,
+        password_confirmation: data.confirmPassword,
+      });
 
-      const result = await response.json()
+      const result = response.data;
 
-      if (response.ok) {
-        router.push('/verification', locale)
+      if (response.status === 200 && result.status) {
+        toast.success("Registration successful! Please verify your email to continue");
+
+        router.push(`/auth/professional/verify-otp?email=${encodeURIComponent(data.email)}`);
       } else {
-        setError(result.message || 'Registration failed')
+        setError(result.message || "Registration failed");
       }
     } catch (error) {
-      setError('An error occurred during registration')
+      setError(
+        error.response?.data?.message || "An error occurred during registration"
+      );
     }
-  }
+  };
+
+  
 
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -129,9 +142,8 @@ const Register = () => {
                     }`}
                   >
                     <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
                   </select>
                   {errors.gender && (
                     <p className="mt-1 text-sm text-red-500">{errors.gender.message}</p>
@@ -326,7 +338,7 @@ const Register = () => {
               {dictionary?.links_text || "Already have an account?"}
             </p>
             <Link
-              href={`/auth/login?locale=${locale}`}
+              href={`/auth/login`}
               className="mt-2 inline-block text-[#aa9270] hover:underline"
             >
               Login here

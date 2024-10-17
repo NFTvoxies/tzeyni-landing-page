@@ -2,11 +2,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../../components/ui/sheet"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { useRouter } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isRouteHome, setIsRouteHome] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,17 +20,39 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const { data: session } = useSession(); // Get session
+
   useEffect(() => {
     setIsRouteHome(window.location.pathname === '/home' || window.location.pathname === '/');
+    
+    // // Check if user is logged in (i.e., token exists in localStorage)
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   setIsLoggedIn(true);
+    // }
   }, []);
+
+  // const handleLogout = () => {
+  //   // Remove the token from localStorage
+  //   localStorage.removeItem('token');
+    
+  //   // Update the state
+  //   setIsLoggedIn(false);
+
+  //   // Redirect to home or login page
+  //   router.push('/auth/login');
+  // };
+
+  const handleLogout = () => {
+    signOut(); // Logs the user out
+  };
 
   const navLinks = [
     { href: '/home', label: 'Accueil' },
     { href: '/about', label: 'À propos' },
     { href: '/service', label: 'Services' },
     { href: '/FAQ', label: 'FAQ' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/auth/login', label: 'Connexion' },
+    { href: '/contact', label: 'Contact' }
   ];
 
   return (
@@ -53,14 +79,39 @@ const Navbar = () => {
                 key={index}
                 href={link.href}
                 className={`text-sm font-medium transition-colors duration-200 hover:text-[#aa9270] ${
-                  index === navLinks.length - 1
-                    ? 'px-6 py-2 border-2 border-[#aa9270] text-[#aa9270] rounded-full hover:bg-[#aa9270] hover:text-white'
-                    : isScrolled ? 'text-white' : 'text-white'
+                  isScrolled ? 'text-white' : 'text-white'
                 }`}
               >
                 {link.label}
               </a>
             ))}
+
+            {session ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="px-6 py-2 border-2 border-[#aa9270] text-[#aa9270] rounded-full hover:bg-[#aa9270] hover:text-white transition duration-200"
+                >
+                  Logout
+                </button>
+                <div className="ml-4">
+                  <Image
+                    src="/assets/image/profile-icon.png" // Your profile icon image
+                    alt="Profile Icon"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                </div>
+              </>
+            ) : (
+              <a
+                href="/auth/choose-login"
+                className="px-6 py-2 border-2 border-[#aa9270] text-[#aa9270] rounded-full hover:bg-[#aa9270] hover:text-white transition duration-200"
+              >
+                Connexion
+              </a>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -93,14 +144,27 @@ const Navbar = () => {
                       key={index}
                       href={link.href}
                       className={`px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg ${
-                        index === navLinks.length - 1
-                          ? 'text-center border-2 border-[#aa9270] text-[#aa9270] hover:bg-[#aa9270] hover:text-white'
-                          : 'text-gray-800 hover:bg-gray-100 hover:text-[#aa9270]'
+                        'text-gray-800 hover:bg-gray-100 hover:text-[#aa9270]'
                       }`}
                     >
                       {link.label}
                     </a>
                   ))}
+                  {isLoggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      className="text-center border-2 border-[#aa9270] text-[#aa9270] px-4 py-3 hover:bg-[#aa9270] hover:text-white transition duration-200"
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <a
+                      href="/auth/choose-login"
+                      className="text-center border-2 border-[#aa9270] text-[#aa9270] px-4 py-3 hover:bg-[#aa9270] hover:text-white transition duration-200"
+                    >
+                      Connexion
+                    </a>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
