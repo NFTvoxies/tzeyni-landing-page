@@ -1,6 +1,4 @@
 import Head from "next/head";
-
-import Navbar from "./components/navbar";
 import Hero from "./components/Hero";
 import IconSection from "./components/IconSection";
 import Features from "./components/Features";
