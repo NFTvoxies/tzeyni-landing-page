@@ -61,7 +61,7 @@ const OtpUser = () => {
         setRedirectMessage("Redirecting to login page...");
 
         setTimeout(() => {
-          router.push("/auth/login");
+          router.push("/auth/login/client");
         }, 3000);
       } else {
         const errorData = await response.json();

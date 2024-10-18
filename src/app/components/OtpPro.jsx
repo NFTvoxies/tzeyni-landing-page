@@ -61,7 +61,7 @@ const OtpPro = () => {
         setRedirectMessage("Redirecting to login page...");
 
         setTimeout(() => {
-          router.push("/auth/login");
+          router.push("/auth/login/professional");
         }, 3000);
       } else {
         const errorData = await response.json();
