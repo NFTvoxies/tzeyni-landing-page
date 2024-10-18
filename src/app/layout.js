@@ -1,7 +1,10 @@
+// src/app/layout.js
+
 import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,9 +27,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className={geistSans.className}>
-      <SessionProviderWrapper>
-        {children}
-      </SessionProviderWrapper>
+        {/* Wrap the entire app with CartProvider */}
+        <CartProvider>
+          <SessionProviderWrapper>
+            {children}
+          </SessionProviderWrapper>
+        </CartProvider>
       </body>
     </html>
   );

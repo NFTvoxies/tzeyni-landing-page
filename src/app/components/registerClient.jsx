@@ -66,7 +66,7 @@ const RegisterClient = () => {
           "Registration successful. Check your email for the verification code."
         );
 
-        router.push(`/auth/verify-otp?email=${encodeURIComponent(data.email)}`);
+        router.push(`/auth/client/verify-otp?email=${encodeURIComponent(data.email)}`);
       } else {
         setError(result.message || "Registration failed");
       }
