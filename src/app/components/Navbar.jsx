@@ -35,6 +35,8 @@ const Navbar = () => {
     { href: '/home', label: 'Accueil' },
     { href: '/about', label: 'À propos' },
     { href: '/service', label: 'Services' },
+    { href: '/Products', label: 'Produits' },
+    { href: '/pricing', label: 'abonnement' },
     { href: '/FAQ', label: 'FAQ' },
     { href: '/contact', label: 'Contact' }
   ];
@@ -107,12 +109,12 @@ const Navbar = () => {
                         <HeadlessMenu.Item>
                           {({ active }) => (
                             <Link
-                              href="/dashboard"
+                              href="/booking"
                               className={`${
                                 active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
                               } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
-                              Dashboard
+                              Mes reservations
                             </Link>
                           )}
                         </HeadlessMenu.Item>
@@ -186,8 +188,8 @@ const Navbar = () => {
                       <Link href="/profile" className="px-4 py-3 text-base font-medium text-gray-800 hover:bg-gray-100 hover:text-[#aa9270] transition-all duration-200 rounded-lg">
                         Profile
                       </Link>
-                      <Link href="/dashboard" className="px-4 py-3 text-base font-medium text-gray-800 hover:bg-gray-100 hover:text-[#aa9270] transition-all duration-200 rounded-lg">
-                        Dashboard
+                      <Link href="/booking" className="px-4 py-3 text-base font-medium text-gray-800 hover:bg-gray-100 hover:text-[#aa9270] transition-all duration-200 rounded-lg">
+                        Mes reservations
                       </Link>
                       <button
                         onClick={handleLogout}

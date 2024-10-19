@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Controller, useForm } from "react-hook-form";
 import { Icon } from "@iconify/react";
 import axios from "../../axios";
+import toast from "react-hot-toast";
 
 const RegisterClient = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -62,7 +63,7 @@ const RegisterClient = () => {
       const result = response.data;
 
       if (response.status === 200 && result.status) {
-        setSuccessMessage(
+        toast.success(
           "Registration successful. Check your email for the verification code."
         );
 

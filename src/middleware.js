@@ -15,6 +15,18 @@ export default withAuth({
       if (pathname.startsWith("/home") && token?.role !== "client") {
         return false;
       }
+      if (pathname.startsWith("/booking") && token?.role !== "client") {
+        return false;
+      }
+      if (pathname.startsWith("/profile") && token?.role !== "client") {
+        return false;
+      }
+      if (pathname.startsWith("/Products") && token?.role !== "client") {
+        return false;
+      }
+      if (pathname.startsWith("/checkout") && token?.role !== "client") {
+        return false;
+      }
 
       // Allow access if role matches the required page or for public pages
       return true;
@@ -23,5 +35,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/home", "/dashboard", "/profile", "/orders", "/reservations"],
+  matcher: ["/home", "/dashboard", "/profile", "/orders", "/booking", "/checkout", "/Products"],
 };

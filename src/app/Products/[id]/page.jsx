@@ -3,7 +3,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Navbar from '../../components/navbar';
 import Footer from '../../components/Footer';
 import { Heart, ShoppingBag, Star } from 'lucide-react';
 import { CartContext } from '../../../context/CartContext';
@@ -17,74 +16,63 @@ import {
   Chip
 } from '@mui/material';
 import { Icon } from '@iconify/react';
+import Navbar from '@/app/components/Navbar';
 
 // This would typically come from an API or database, but for a static site, we'll keep it here
 const products = [
   {
-    id:1,
-    name: "Apple iMac 27\"",
-    description: "Apple M3 Octa Core, 27-inch Retina 5K display, RAM 8GB, SSD 256GB.",
-    price: "$1,799",
-    colors: ["Silver", "Space Gray"],
+    id: 1,
+    name: "L'Oréal Paris Revitalift Cream",
+    description: "Anti-wrinkle and firming face cream, 50ml.",
+    price: "$25",
+    colors: ["White"],
     images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-back.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-side.svg",
+      "/assets/image/revitalift-front.png",
+      "/assets/image/revitalift-front.png",
     ],
   },
   {
-    id:2,
-    name: "Samsung Galaxy S21",
-    description: "6.2-inch display, 128GB storage, triple camera setup, 4000mAh battery.",
-    price: "$799",
-    colors: ["Phantom Gray", "Phantom White", "Phantom Violet"],
+    id: 2,
+    name: "Neutrogena Hydro Boost Water Gel",
+    description: "Hydrating water gel for dry skin, 50g.",
+    price: "$20",
+    colors: ["Blue"],
     images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/samsung-s21-front.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/samsung-s21-back.svg",
+      "/assets/image/hydro-boost-front.png",
+      "/assets/image/hydro-boost-front.png",
     ],
   },
   {
-    id:3,
-    name: "Sony WH-1000XM4 Headphones",
-    description: "Industry-leading noise cancellation, up to 30 hours of battery life, touch sensor controls.",
-    price: "$348",
-    colors: ["Black", "Silver"],
+    id: 3,
+    name: "Olay Regenerist Micro-Sculpting Cream",
+    description: "Advanced anti-aging moisturizer, 50g.",
+    price: "$30",
+    colors: ["Red"],
     images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/sony-headphones.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/sony-headphones-angle.svg",
+      "/assets/image/regenerist-front.png",
+      "/assets/image/regenerist-front.png",
     ],
   },
   {
-    id:4,
-    name: "Apple MacBook Pro 14\"",
-    description: "Apple M1 Pro chip, 16GB RAM, 512GB SSD, Liquid Retina XDR display.",
-    price: "$1,999",
-    colors: ["Silver", "Space Gray"],
-    images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-front.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook-pro-side.svg",
-    ],
-  },
-  {
-    id:5,
-    name: "Nikon D5600 Camera",
-    description: "24.2MP DSLR, Full HD video recording, 3.2-inch touchscreen, built-in Wi-Fi.",
-    price: "$699",
+    id: 4,
+    name: "Philips Norelco Electric Shaver",
+    description: "Wet and dry electric shaver with precision trimmer.",
+    price: "$120",
     colors: ["Black"],
     images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/nikon-camera.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/nikon-camera-side.svg",
+      "/assets/image/norelco-front.png",
+      "/assets/image/norelco-front.png",
     ],
   },
   {
-    id:6,
-    name: "Fitbit Charge 5",
-    description: "Fitness tracker with built-in GPS, heart rate monitor, sleep tracking.",
-    price: "$179",
-    colors: ["Black", "Lunar White", "Steel Blue"],
+    id: 5,
+    name: "Dyson Supersonic Hair Dryer",
+    description: "Fast drying, controlled styling, with heat protection.",
+    price: "$400",
+    colors: ["Iron/Fuchsia"],
     images: [
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/fitbit-charge5-front.svg",
-      "https://flowbite.s3.amazonaws.com/blocks/e-commerce/fitbit-charge5-back.svg",
+      "/assets/image/supersonic-front.png",
+      "/assets/image/supersonic-front.png",
     ],
   },
 ];

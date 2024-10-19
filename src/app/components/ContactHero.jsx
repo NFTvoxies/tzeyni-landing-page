@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const ContactHero = () => {
   return (
-    <div className="relative min-h-[60vh] w-full pt-40">  {/* Added pt-40 for top padding */}
+    <div className="relative min-h-[60vh] w-full pt-60">  {/* Added pt-40 for top padding */}
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image

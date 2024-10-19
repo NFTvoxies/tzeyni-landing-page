@@ -26,25 +26,24 @@ const Newsletter = () => {
   const benefitsList = [
     {
       icon: 'solar:gift-bold-duotone',
-      text: 'Exclusive Offers & Promotions',
+      text: 'Offres Exclusives & Promotions',
     },
     {
       icon: 'solar:bell-bold-duotone',
-      text: 'Early Access to New Services',
+      text: 'Accès Anticipé aux Nouveaux Services',
     },
     {
       icon: 'solar:calendar-bold-duotone',
-      text: 'Special Event Invitations',
+      text: 'Invitations à des Événements Spéciaux',
     },
   ];
 
   return (
     <section className="relative py-20">
-      {/* Background Gradient */}
+      {/* Fond en dégradé */}
       <div className="absolute inset-0 bg-gradient-to-b bg-[#323232]"></div>
-    , 
-      
-      {/* Decorative Elements */}
+    
+      {/* Éléments décoratifs */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#c2a33c] rounded-full blur-[100px] -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#e7d1b4] rounded-full blur-[100px] translate-y-1/2"></div>
@@ -53,21 +52,21 @@ const Newsletter = () => {
       <div className="relative mx-4 max-w-6xl lg:mx-auto">
         <div className="relative backdrop-blur-xl rounded-3xl overflow-hidden bg-gray-800/50 border border-gray-700">
           <div className="p-8 md:p-10">
-            {/* Header */}
+            {/* En-tête */}
             <div className="text-center max-w-2xl mx-auto mb-12">
               <Icon
                 icon="solar:letter-bold-duotone"
                 className="w-16 h-16 text-[#c2a33c] mx-auto mb-6"
               />
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Stay Updated with Tzeyni
+                Restez Informé avec Tzeyni
               </h2>
               <p className="text-gray-300 text-lg mb-8">
-                Join our community for exclusive updates, beauty tips, and offers tailored just for you.
+                Rejoignez notre communauté pour des mises à jour exclusives, des conseils beauté et des offres personnalisées.
               </p>
             </div>
 
-            {/* Benefits */}
+            {/* Avantages */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
               {benefitsList.map((benefit, index) => (
                 <div
@@ -80,11 +79,11 @@ const Newsletter = () => {
               ))}
             </div>
 
-            {/* Form */}
+            {/* Formulaire */}
             <form onSubmit={handleSubmit} className="max-w-xl mx-auto relative">
               <input
                 type="email"
-                placeholder="Enter your email address"
+                placeholder="Entrez votre adresse e-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -105,7 +104,7 @@ const Newsletter = () => {
                     />
                   ) : (
                     <>
-                      <span>Subscribe</span>
+                      <span>S'abonner</span>
                       <Icon
                         icon={isHovered ? 'solar:arrow-right-bold' : 'solar:bell-bold'}
                         className="w-5 h-5 transition-all duration-300"
@@ -116,7 +115,7 @@ const Newsletter = () => {
               </button>
             </form>
 
-            {/* Status Messages */}
+            {/* Messages de statut */}
             {status === 'success' && (
               <div className="mt-6 max-w-xl mx-auto">
                 <Alert className="bg-green-900/50 border-green-600 text-green-100">
@@ -124,9 +123,9 @@ const Newsletter = () => {
                     icon="solar:check-circle-bold"
                     className="w-5 h-5 text-green-400"
                   />
-                  <AlertTitle>Success!</AlertTitle>
+                  <AlertTitle>Succès !</AlertTitle>
                   <AlertDescription>
-                    Welcome to our newsletter! Check your email for a special gift.
+                    Bienvenue dans notre newsletter ! Consultez votre e-mail pour un cadeau spécial.
                   </AlertDescription>
                 </Alert>
               </div>
@@ -135,23 +134,23 @@ const Newsletter = () => {
               <div className="mt-6 max-w-xl mx-auto">
                 <Alert variant="destructive" className="bg-red-900/50 border-red-600">
                   <Icon icon="solar:danger-triangle-bold" className="w-5 h-5 text-red-400" />
-                  <AlertTitle>Error</AlertTitle>
+                  <AlertTitle>Erreur</AlertTitle>
                   <AlertDescription>
-                    Something went wrong. Please try again later.
+                    Une erreur s'est produite. Veuillez réessayer plus tard.
                   </AlertDescription>
                 </Alert>
               </div>
             )}
 
-            {/* Footer */}
+            {/* Pied de page */}
             <p className="text-center text-gray-400 text-sm mt-8">
-              By subscribing, you agree to our{' '}
+              En vous abonnant, vous acceptez notre{' '}
               <a href="#" className="text-[#c2a33c] hover:underline">
-                Privacy Policy
+                Politique de Confidentialité
               </a>{' '}
-              and{' '}
+              et nos{' '}
               <a href="#" className="text-[#c2a33c] hover:underline">
-                Terms of Service
+                Conditions d'Utilisation
               </a>
               .
             </p>

@@ -8,37 +8,37 @@ const testimonials = [
         id: 1,
         image: '/assets/image/testimonial1.jpeg',
         name: 'Sarah Johnson',
-        pronoun: 'She/Her',
-        location: 'Morocco, Casablanca',
-        title: 'Tzeyni transformed my entire look',
-        text: 'Absolutely thrilled with my experience at Tzeyni! The attention to detail and personalized care I received was exceptional. My stylist took the time to understand exactly what I wanted and delivered beyond my expectations. The atmosphere was luxurious and welcoming.',
+        pronoun: 'Elle',
+        location: 'Maroc, Casablanca',
+        title: 'Tzeyni a transformé mon look entier',
+        text: "Absolument ravie de mon expérience chez Tzeyni ! L'attention aux détails et les soins personnalisés que j'ai reçus étaient exceptionnels. Mon styliste a pris le temps de comprendre exactement ce que je voulais et a dépassé mes attentes. L'atmosphère était luxueuse et accueillante.",
         rating: 5,
-        date: '2 weeks ago',
-        serviceType: 'Hair Styling & Coloring'
+        date: 'il y a 2 semaines',
+        serviceType: 'Coiffure & Coloration'
     },
     {
         id: 2,
         image: '/assets/image/testimonial2.png',
         name: 'Michael Chen',
-        pronoun: 'He/Him',
-        location: 'Morocco, Rabat',
-        title: 'Professional service that exceeds expectations',
-        text:"The level of expertise at Tzeyni is unmatched. I've been to many salons, but none compare to the quality and professionalism I experienced here. The stylist's knowledge and technique were impressive, and the results speak for themselves.",
+        pronoun: 'Il',
+        location: 'Maroc, Rabat',
+        title: 'Service professionnel qui dépasse les attentes',
+        text:"Le niveau d'expertise chez Tzeyni est inégalé. J'ai été dans de nombreux salons, mais aucun ne se compare à la qualité et au professionnalisme que j'ai expérimentés ici. La connaissance et la technique du styliste étaient impressionnantes, et les résultats parlent d'eux-mêmes.",
         rating: 4,
-        date: '1 month ago',
-        serviceType: 'Premium Haircut'
+        date: 'il y a 1 mois',
+        serviceType: 'Coupe de cheveux premium'
     },
     {
         id: 3,
         image: '/assets/image/testimonial3.png',
         name: 'Emma Martinez',
-        pronoun: 'She/Her',
-        location: 'Morocco, Marrakech',
-        title: 'A truly luxurious experience',
-        text: "From booking to the final result, everything was perfect. The stylist was not only skilled but also made great conversation and gave excellent advice for maintaining my new style. The salon's attention to detail is remarkable.",
+        pronoun: 'Elle',
+        location: 'Maroc, Marrakech',
+        title: 'Une expérience vraiment luxueuse',
+        text: "De la réservation au résultat final, tout était parfait. Le styliste était non seulement compétent mais aussi très agréable et a donné d'excellents conseils pour entretenir mon nouveau style. L'attention aux détails du salon est remarquable.",
         rating: 5,
-        date: '3 weeks ago',
-        serviceType: 'Full Beauty Treatment'
+        date: 'il y a 3 semaines',
+        serviceType: 'Traitement de beauté complet'
     }
 ];
 
@@ -64,19 +64,19 @@ const Testimonial = () => {
         <section className="bg-[#decbb7] py-20 relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OC0xNCAxNC0xNHMxNCA2LjI2OCAxNCAxNHMtNi4yNjggMTQtMTQgMTR6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz48L2c+PC9zdmc+')] opacity-20" />
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OCAxNCAxNC0xNHMxNCA2LjI2OCAxNCAxNHMtNi4yNjggMTQtMTQgMTR6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz48L2c+PC9zdmc+')] opacity-20" />
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="text-center mb-16 relative z-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-[#6e563a] mb-6">
-                        Client Testimonials
+                        Témoignages de Clients
                         <br />
-                        <span className="text-[#c2a33c]">What Our Customers Say</span>
+                        <span className="text-[#c2a33c]">Ce que disent nos clients</span>
                     </h2>
                     <p className="text-[#6e563a]/80 max-w-2xl mx-auto">
-                        Real stories from our valued clients about their transformative experiences with us.
+                        Des histoires réelles de nos précieux clients sur leurs expériences transformantes avec nous.
                     </p>
                 </div>
 

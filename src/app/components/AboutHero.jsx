@@ -3,6 +3,10 @@ import { useState } from "react";
 import Image from "next/image";
 
 const AboutHero = () => {
+  const handleButtonClick = () => {
+    window.location.href = "/service";
+  };
+
   return (
     <div className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white">
       {/* Decorative background elements */}
@@ -47,8 +51,8 @@ const AboutHero = () => {
             </h3>
             <p className="text-gray-600 text-center leading-relaxed">
               L'application vous permet d'accéder facilement à votre espace
-              fidélité, où vous retrouverez votre solde de points et toutes les
-              offres dont vous bénéficiez.
+              fidélité, où vous retrouverez toutes les offres dont vous
+              bénéficiez.
             </p>
           </div>
 
@@ -123,7 +127,10 @@ const AboutHero = () => {
                 7j/7, réservez votre RDV coiffure ou esthétique et gérez votre
                 <span className="font-semibold"> COMPTE FIDÉLITÉ</span>.
               </p>
-              <button className="mt-8 px-8 py-3 bg-white text-[#b57d56] rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-xl hover:shadow-2xl">
+              <button
+                onClick={handleButtonClick}
+                className="mt-8 px-8 py-3 bg-white text-[#b57d56] rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-xl hover:shadow-2xl"
+              >
                 Réserver maintenant
               </button>
             </div>

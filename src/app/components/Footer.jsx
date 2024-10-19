@@ -15,7 +15,7 @@ const Footer = () => {
   ];
 
   const navLinks = [
-    { name: 'Home', href: '/home' },
+    { name: 'Accueil', href: '/home' },
     { name: 'Services', href: '/services' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' }
@@ -25,7 +25,7 @@ const Footer = () => {
     <footer className="relative bg-black text-gray-400 py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 py-10">
-          {/* Logo Section */}
+          {/* Section Logo */}
           <div className="space-y-6">
             <Image 
               src="/assets/image/WHITE_BACKGROUND-removebg-preview.png" 
@@ -35,18 +35,18 @@ const Footer = () => {
               className="object-contain"
             />
             <div>
-              <h3 className="text-lg font-bold text-white">Beauty & More</h3>
-              <p>Invest in your body!</p>
+              <h3 className="text-lg font-bold text-white">Beauté & Plus</h3>
+              <p>Investissez dans votre corps !</p>
             </div>
           </div>
 
-          {/* Contact Section */}
+          {/* Section Contact */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Contact Us</h3>
+            <h3 className="text-lg font-semibold text-white">Contactez-nous</h3>
             <div className="space-y-2">
               <div className="flex items-center space-x-3">
                 <Icon icon="hugeicons:location-03" className="w-5 h-5 text-[#c2a33c]" />
-                <p>Morocco, Casablanca</p>
+                <p>Maroc, Casablanca</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Icon icon="el:phone-alt" className="w-5 h-5 text-[#c2a33c]" />
@@ -59,9 +59,9 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Liens Rapides */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-white">Liens Rapides</h3>
             <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link key={link.name} href={link.href} className="hover:text-[#c2a33c] transition-colors">
@@ -71,9 +71,9 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Social Media Links */}
+          {/* Liens Réseaux Sociaux */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Follow Us</h3>
+            <h3 className="text-lg font-semibold text-white">Suivez-nous</h3>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
@@ -97,7 +97,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 py-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} Tzeyni. All rights reserved.
+            © {new Date().getFullYear()} Tzeyni. Tous droits réservés.
           </p>
         </div>
       </div>

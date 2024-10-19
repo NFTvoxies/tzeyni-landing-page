@@ -29,7 +29,7 @@ const Login = ({ role = "client" }) => {
   });
 
   if (status === "authenticated") {
-    router.push(role === "professional" ? "/dashboard" : "/home");
+    router.push(role === "professional" ? "http://localhost:3001/dashboard" : "/home");
     return null;
   }
 
@@ -49,7 +49,7 @@ const Login = ({ role = "client" }) => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("An unexpected error occurred. Please try again.");
+      setError("Une erreur inattendue s'est produite. Veuillez réessayer.");
     }
   };
 
@@ -63,9 +63,9 @@ const Login = ({ role = "client" }) => {
           className="w-full max-w-md"
         >
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Bienvenue dans {role === "professional" ? "espace professionnelle" : "votre espace client"}
+            Bienvenue dans {role === "professional" ? "votre espace professionnelle" : "votre espace client"}
           </h1>
-          <p className="text-gray-600 mb-8">Login to your account</p>
+          <p className="text-gray-600 mb-8">Connectez-vous à votre compte</p>
 
           {error && (
             <motion.div
@@ -83,10 +83,10 @@ const Login = ({ role = "client" }) => {
               name="email"
               control={control}
               rules={{
-                required: "Email is required",
+                required: "L'email est requis",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
+                  message: "Adresse email invalide",
                 },
               }}
               render={({ field }) => (
@@ -102,7 +102,7 @@ const Login = ({ role = "client" }) => {
                       className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
                         errors.email ? "border-red-500" : "border-gray-300"
                       }`}
-                      placeholder="you@example.com"
+                      placeholder="vous@example.com"
                     />
                     <Icon icon="mdi:email" className="absolute right-3 top-2.5 text-gray-400" />
                   </div>
@@ -116,11 +116,11 @@ const Login = ({ role = "client" }) => {
             <Controller
               name="password"
               control={control}
-              rules={{ required: "Password is required" }}
+              rules={{ required: "Le mot de passe est requis" }}
               render={({ field }) => (
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Password
+                    Mot de passe
                   </label>
                   <div className="relative">
                     <input
@@ -150,10 +150,10 @@ const Login = ({ role = "client" }) => {
             <div className="flex items-center justify-between">
               <label className="flex items-center">
                 <input type="checkbox" className="form-checkbox text-yellow-500" />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                <span className="ml-2 text-sm text-gray-600">Se souvenir de moi</span>
               </label>
               <Link href="/auth/forgot_password" className="text-sm text-[#aa9270] hover:underline">
-                Forgot Password?
+                Mot de passe oublié ?
               </Link>
             </div>
 
@@ -161,24 +161,24 @@ const Login = ({ role = "client" }) => {
               type="submit"
               className="w-full bg-[#aa9270] text-white py-2 px-4 rounded-lg hover:bg-[#aa9270] transition duration-200"
             >
-              Login
+              Connexion
             </button>
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">Don't have an account?</p>
+            <p className="text-sm text-gray-600">Vous n'avez pas de compte ?</p>
             <div className="mt-3 space-x-4">
               <Link
                 href={`/auth/register/client`}
-                className="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-200"
+                className="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-200 mb-2"
               >
-                Register as Client
+                Inscription en tant que Client
               </Link>
               <Link
                 href={`/auth/register/professionnelle`}
                 className="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-200"
               >
-                Register as Professional
+                Inscription en tant que Professionnel
               </Link>
             </div>
           </div>
@@ -211,10 +211,9 @@ const Login = ({ role = "client" }) => {
           </svg>
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-40">
-          <h2 className="text-3xl font-bold mb-2">Welcome to Our Platform</h2>
+          <h2 className="text-3xl font-bold mb-2">Bienvenue sur notre plateforme</h2>
           <p>
-            Connect, collaborate, and grow with our community of professionals
-            and clients.
+            Connectez-vous, collaborez et développez-vous avec notre communauté de professionnels et de clients.
           </p>
         </div>
       </div>
