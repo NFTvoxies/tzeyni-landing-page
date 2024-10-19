@@ -9,10 +9,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { motion } from 'framer-motion';
 
-import toast from "react-hot-toast";
 
 // Hook Imports]
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const OtpUser = () => {
   const router = useRouter();
@@ -55,10 +55,10 @@ const OtpUser = () => {
       );
 
       if (response.ok) {
-        toast.success("Your account has been verified successfully!");
+        toast.success("Votre compte a été vérifié avec succès!");
 
         setIsLoading(true);
-        setRedirectMessage("Redirecting to login page...");
+        setRedirectMessage("Redirection vers la page de connexion...");
 
         setTimeout(() => {
           router.push("/auth/login/client");
@@ -66,12 +66,12 @@ const OtpUser = () => {
       } else {
         const errorData = await response.json();
         toast.error(
-          errorData.message || "Failed to verify OTP. Please try again."
+          errorData.message || "Échec de la vérification de l'OTP. Veuillez réessayer."
         );
       }
     } catch (error) {
-      console.error("Error verifying OTP:", error);
-      toast.error("An error occurred while verifying OTP.");
+      console.error("Erreur lors de la vérification de l'OTP:", error);
+      toast.error("Une erreur s'est produite lors de la vérification de l'OTP.");
     }
   };
 
@@ -101,17 +101,17 @@ const OtpUser = () => {
       );
 
       if (response.ok) {
-        toast.success("A new OTP has been sent to your email!");
+        toast.success("Un nouvel OTP a été envoyé à votre adresse e-mail!");
       } else {
         const errorData = await response.json();
 
         toast.error(
-          errorData.message || "Failed to resend OTP. Please try again."
+          errorData.message || "Échec de la réexpédition de l'OTP. Veuillez réessayer."
         );
       }
     } catch (error) {
-      console.error("Error resending OTP:", error);
-      toast.error("An error occurred while resending OTP.");
+      console.error("Erreur lors de la réexpédition de l'OTP:", error);
+      toast.error("Une erreur s'est produite lors de la réexpédition de l'OTP.");
     }
   };
 
@@ -124,10 +124,10 @@ const OtpUser = () => {
         className="bg-white shadow-lg rounded-lg w-full max-w-lg p-8"
       >
         <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">
-          Verify Your Email
+          Vérifiez votre e-mail
         </h1>
         <p className="text-gray-600 mb-6 text-center">
-          We sent a 6-digit code to <span className="font-semibold">{maskEmail(email)}</span>
+          Nous avons envoyé un code à 6 chiffres à <span className="font-semibold">{maskEmail(email)}</span>
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -163,22 +163,22 @@ const OtpUser = () => {
               watchOtp.some((otp) => !otp) && 'opacity-50 cursor-not-allowed'
             }`}
           >
-            Verify My Account
+            Vérifier mon compte
           </button>
 
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              Didn’t receive the code?{' '}
+              Vous n'avez pas reçu le code?{' '}
               <span
                 onClick={() => handleResendOtp()}
                 className="text-[#aa9270] cursor-pointer hover:underline"
               >
-                Resend
+                Renvoyer
               </span>
             </p>
             <p className="text-sm text-gray-600 mt-2">
               <Link href="/auth/login" className="text-[#aa9270] hover:underline">
-                Return to Login
+                Retour à la connexion
               </Link>
             </p>
           </div>

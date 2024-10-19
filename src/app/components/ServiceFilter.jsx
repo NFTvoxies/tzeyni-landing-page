@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 
 const ServiceFilter = () => {
   const [priceFilters, setPriceFilters] = useState({
-    all: true,
+    Tout: true,
     '0-100': false,
     '100-200': false,
     '200-300': false,
@@ -13,10 +13,10 @@ const ServiceFilter = () => {
   });
 
   const [categoryFilters, setCategoryFilters] = useState({
-    all: true,
-    beauty: false,
-    wellness: false,
-    hairstyling: false,
+    Tout: true,
+    beauté: false,
+    bienêtre: false,
+    coiffure: false,
   });
 
   const handlePriceFilterChange = (filter) => {
@@ -64,7 +64,6 @@ const ServiceFilter = () => {
     <div className="w-full lg:w-1/4 bg-white p-6 rounded-xl shadow-xl mb-8 lg:mb-0 lg:mr-8 border border-[#C4AB9A]/20">
       <div className="mb-8">
         <h3 className="text-xl font-bold text-[#b57d56] mb-4 flex items-center">
-          <Icon icon="mdi:currency-usd" className="mr-2 h-6 w-6" />
           Prix
         </h3>
         <div className="space-y-2">
@@ -73,7 +72,7 @@ const ServiceFilter = () => {
               key={key}
               checked={value}
               onChange={() => handlePriceFilterChange(key)}
-              label={key === 'all' ? 'Tous les prix' : `$${key.split('-').join(' - $')}`}
+              label={key === 'Tout' ? 'Tous les prix' : `MAD ${key.split('-').join(' - MAD ')}`}
             />
           ))}
         </div>
@@ -89,7 +88,7 @@ const ServiceFilter = () => {
               key={key}
               checked={value}
               onChange={() => handleCategoryFilterChange(key)}
-              label={key === 'all' ? 'Toutes les catégories' : key.charAt(0).toUpperCase() + key.slice(1)}
+              label={key === 'Tout' ? 'Toutes les catégories' : key.charAt(0).toUpperCase() + key.slice(1)}
             />
           ))}
         </div>

@@ -20,7 +20,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
   return (
     <div className="bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:p-6">
-        <h2 className="text-lg font-medium leading-6 text-gray-900 mb-4">Payment Method</h2>
+        <h2 className="text-lg font-medium leading-6 text-gray-900 mb-4">Méthode de paiement</h2>
         <div className="space-y-4">
           <div className="flex items-center">
             <input
@@ -33,7 +33,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
               className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
             />
             <label htmlFor="creditCard" className="ml-3 block text-sm font-medium text-gray-700">
-              Credit Card
+              Carte de crédit
             </label>
           </div>
           <div className="flex items-center">
@@ -55,7 +55,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
           <div className="mt-6 space-y-4">
             <div>
               <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">
-                Card Number
+                Numéro de carte
               </label>
               <input
                 type="text"
@@ -70,7 +70,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
             <div className="flex space-x-4">
               <div className="flex-1">
                 <label htmlFor="expirationDate" className="block text-sm font-medium text-gray-700">
-                  Expiration Date
+                  Date d'expiration
                 </label>
                 <input
                   type="text"
@@ -79,7 +79,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
                   value={cardDetails.expirationDate}
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  placeholder="MM/YY"
+                  placeholder="MM/AA"
                 />
               </div>
               <div className="flex-1">
@@ -104,7 +104,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
             onClick={handleBack}
             className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Back
+            Retour
           </button>
           <button
             onClick={handleNext}
@@ -115,7 +115,7 @@ const StepPayment = ({ handleNext, handleBack }) => {
                 : 'bg-gray-300 cursor-not-allowed'
             }`}
           >
-            Place Order
+            Passer la commande
           </button>
         </div>
       </div>

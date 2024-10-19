@@ -17,11 +17,11 @@ const StepAddress = ({ handleNext, handleBack }) => {
   return (
     <div className="bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:p-6">
-        <h2 className="text-lg font-medium leading-6 text-gray-900 mb-4">Shipping Address</h2>
+        <h2 className="text-lg font-medium leading-6 text-gray-900 mb-4">Adresse de livraison</h2>
         <form className="space-y-4">
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-              Full Name
+              Nom complet
             </label>
             <input
               type="text"
@@ -35,7 +35,7 @@ const StepAddress = ({ handleNext, handleBack }) => {
           </div>
           <div>
             <label htmlFor="addressLine" className="block text-sm font-medium text-gray-700">
-              Address
+              Adresse
             </label>
             <input
               type="text"
@@ -49,7 +49,7 @@ const StepAddress = ({ handleNext, handleBack }) => {
           </div>
           <div>
             <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-              City
+              Ville
             </label>
             <input
               type="text"
@@ -63,7 +63,7 @@ const StepAddress = ({ handleNext, handleBack }) => {
           </div>
           <div>
             <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
-              Postal Code
+              Code postal
             </label>
             <input
               type="text"
@@ -81,7 +81,7 @@ const StepAddress = ({ handleNext, handleBack }) => {
             onClick={handleBack}
             className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Back
+            Retour
           </button>
           <button
             onClick={handleNext}
@@ -92,7 +92,7 @@ const StepAddress = ({ handleNext, handleBack }) => {
                 : 'bg-gray-300 cursor-not-allowed'
             }`}
           >
-            Proceed to Payment
+            Procéder au paiement
           </button>
         </div>
       </div>

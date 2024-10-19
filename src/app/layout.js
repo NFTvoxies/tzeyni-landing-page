@@ -5,6 +5,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
 import { CartProvider } from "@/context/CartContext";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
         <CartProvider>
           <SessionProviderWrapper>
             {children}
+            <Toaster position="top-right" />
           </SessionProviderWrapper>
         </CartProvider>
       </body>

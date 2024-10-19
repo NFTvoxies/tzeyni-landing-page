@@ -66,22 +66,22 @@ const Features = () => {
   return (
     <section className="bg-gradient-to-b from-[#ab9e85] to-[#998b73] py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="text-center mb-16 space-y-4">
-          <h3 className="text-lg font-medium text-white/80">Services</h3>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Special Features
-          </h2>
-          <p className="max-w-2xl mx-auto text-white/80">
-            Tzeyni brings the salon experience to you, wherever you are. Say
-            goodbye to the hassle of scheduling appointments and traveling to a
-            salon.
-          </p>
-        </div>
+      
+          <div className="text-center mb-16 space-y-4">
+            <h3 className="text-lg font-medium text-white/80">Services</h3>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              Caractéristiques Spéciales
+            </h2>
+            <p className="max-w-2xl mx-auto text-white/80">
+              Tzeyni apporte l'expérience du salon à vous, où que vous soyez. Dites
+              adieu aux tracas de la prise de rendez-vous et des déplacements vers un
+              salon.
+            </p>
+          </div>
 
-        {/* Carousel Section */}
+          {/* Section de Carrousel */}
         <div className="relative">
-          {/* Navigation Buttons */}
+          {/* Boutons de Navigation */}
           <button
             onClick={() => scroll("left")}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -107,7 +107,7 @@ const Features = () => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div className="h-[400px] bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
-                  {/* Image Container */}
+                  {/* Conteneur d'Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
                       src={feature.image}
@@ -117,7 +117,7 @@ const Features = () => {
                     />
                   </div>
 
-                  {/* Content */}
+                  {/* Contenu */}
                   <div className="p-6 space-y-4 flex flex-col">
                     <h3 className="text-xl font-semibold text-gray-800">
                       {feature.title}
@@ -127,36 +127,36 @@ const Features = () => {
                     </p>
 
                     <button className="w-full bg-[#ab9e85] text-white py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#8a7d64] flex items-center justify-center space-x-2 group">
-                      <span>Book Now</span>
+                      <span>Réserver Maintenant</span>
                       <Icon
                         icon="solar:arrow-right-broken"
                         className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
                       />
                     </button>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  </div>
+                  </div>
+                  ))}
+                  </div>
 
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Icon
-              icon="octicon:chevron-right-12"
-              className="w-6 h-6 text-[#ab9e85]"
-            />
-          </button>
-        </div>
+                  <button
+                    onClick={() => scroll("right")}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Icon
+                      icon="octicon:chevron-right-12"
+                      className="w-6 h-6 text-[#ab9e85]"
+                    />
+                  </button>
+                  </div>
 
-        {/* View All Button */}
+                  {/* Voir Tous les Services */}
         <div className="mt-12 text-center">
           <a
-            href="#"
+            href="/service"
             className="inline-flex items-center space-x-2 px-8 py-3 border-2 border-white text-white rounded-full font-medium transition-all duration-300 hover:bg-white hover:text-[#ab9e85] group"
           >
-            <span>View All Services</span>
+            <span>Voir Tous les Services</span>
             <Icon
               icon="raphael:arrowright"
               className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"

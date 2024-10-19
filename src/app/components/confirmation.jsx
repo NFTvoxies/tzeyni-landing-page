@@ -30,13 +30,13 @@ const StepConfirmation = () => {
               d="M5 13l4 4L19 7"
             />
           </svg>
-          <h2 className="mt-2 text-lg font-medium text-gray-900">Order Confirmed!</h2>
+          <h2 className="mt-2 text-lg font-medium text-gray-900">Commande Confirmée!</h2>
           <p className="mt-1 text-sm text-gray-500">
-            Thank you for your purchase. Your order has been placed successfully.
+            Merci pour votre achat. Votre commande a été passée avec succès.
           </p>
         </div>
         <div className="mt-6">
-          <h3 className="text-sm font-medium text-gray-900">Order Summary</h3>
+          <h3 className="text-sm font-medium text-gray-900">Résumé de la commande</h3>
           <dl className="mt-2 divide-y divide-gray-200">
             {cartItems.map((item) => (
               <div key={item.id} className="flex justify-between py-2">
@@ -51,9 +51,9 @@ const StepConfirmation = () => {
           </dl>
         </div>
         <div className="mt-6">
-          <Link href="/">
+          <Link href="/Products">
             <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Continue Shopping
+              Continuer vos achats
             </button>
           </Link>
         </div>
