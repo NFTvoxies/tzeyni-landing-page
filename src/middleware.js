@@ -35,5 +35,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/home", "/dashboard", "/profile", "/orders", "/booking", "/checkout", "/Products"],
+  matcher: ["/dashboard", "/profile", "/orders", "/booking", "/checkout", "/Products"],
 };

@@ -8,7 +8,7 @@ const ProductList = ({ product }) => {
 
   const handleClick = () => {
     console.log("hello")
-    console.table( product )
+    console.table(product)
     router.push(`/Products/${product.id}`);
   };
 
@@ -21,9 +21,8 @@ const ProductList = ({ product }) => {
             <Image
               src={image}
               alt={`Product image ${idx + 1}`}
-              layout="fill"
-              objectFit="cover"
-              className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2"
+              fill
+              className="object-cover absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2"
             />
           </div>
         ))}

@@ -115,9 +115,8 @@ const LoginPro = () => {
                       {...field}
                       type="email"
                       id="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                        errors.email ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.email ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="you@example.com"
                     />
                     <Icon
@@ -155,9 +154,8 @@ const LoginPro = () => {
                       {...field}
                       type={isPasswordShown ? "text" : "password"}
                       id="password"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                        errors.password ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="••••••••"
                     />
                     <button
@@ -233,9 +231,8 @@ const LoginPro = () => {
         <Image
           src="/assets/image/tzeyni header bg.png" // Replace with your actual image path
           alt="Login background"
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
+          fill
+          className="object-cover z-0"
         />
         <div className="absolute inset-0 bg-[#aa9270] opacity-20 z-20"></div>
         <div className="absolute inset-0 z-30">

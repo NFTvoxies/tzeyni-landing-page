@@ -42,19 +42,19 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isRouteHome ? 'bg-transparent' : 'bg-black/75 backdrop-blur-sm shadow-md' 
-    } ${isScrolled ? 'bg-black/75 backdrop-blur-sm shadow-md' : ''}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isRouteHome ? 'bg-transparent' : 'bg-black/75 backdrop-blur-sm shadow-md'
+      } ${isScrolled ? 'bg-black/75 backdrop-blur-sm shadow-md' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Image 
-              src="/assets/image/WHITE_BACKGROUND-removebg-preview.png" 
-              alt="Tzeyni Logo" 
-              width={70} 
-              height={70}
-              className="w-auto h-12"
+            <Image
+              src="/assets/image/WHITE_BACKGROUND-removebg-preview.png"
+              alt="Tzeyni Logo"
+              width={120}
+              height={120}
+              className="w-auto h-12 cursor-pointer hover:opacity-80"
+              onClick={() => router.push('/home')}
             />
           </div>
 
@@ -64,9 +64,8 @@ const Navbar = () => {
               <a
                 key={index}
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-[#aa9270] ${
-                  isScrolled ? 'text-white' : 'text-white'
-                }`}
+                className={`text-sm font-medium transition-colors duration-200 hover:text-[#aa9270] ${isScrolled ? 'text-white' : 'text-white'
+                  }`}
               >
                 {link.label}
               </a>
@@ -98,9 +97,8 @@ const Navbar = () => {
                           {({ active }) => (
                             <Link
                               href="/profile"
-                              className={`${
-                                active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
-                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                              className={`${active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
+                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
                               Profile
                             </Link>
@@ -110,9 +108,8 @@ const Navbar = () => {
                           {({ active }) => (
                             <Link
                               href="/booking"
-                              className={`${
-                                active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
-                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                              className={`${active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
+                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
                               Mes reservations
                             </Link>
@@ -124,9 +121,8 @@ const Navbar = () => {
                           {({ active }) => (
                             <button
                               onClick={handleLogout}
-                              className={`${
-                                active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
-                              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                              className={`${active ? 'bg-[#aa9270] text-white' : 'text-gray-900'
+                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             >
                               Logout
                             </button>
@@ -152,9 +148,8 @@ const Navbar = () => {
             <Sheet>
               <SheetTrigger asChild>
                 <button
-                  className={`p-2 rounded-md ${
-                    isScrolled ? 'text-white' : 'text-white'
-                  }`}
+                  className={`p-2 rounded-md ${isScrolled ? 'text-white' : 'text-white'
+                    }`}
                 >
                   <Menu className="h-6 w-6" />
                 </button>
@@ -162,10 +157,10 @@ const Navbar = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-white transition-opacity">
                 <SheetHeader>
                   <SheetTitle className="text-left">
-                    <Image 
-                      src="/assets/image/WHITE_BACKGROUND-removebg-preview.png" 
-                      alt="Tzeyni Logo" 
-                      width={80} 
+                    <Image
+                      src="/assets/image/WHITE_BACKGROUND-removebg-preview.png"
+                      alt="Tzeyni Logo"
+                      width={80}
                       height={80}
                       className="w-auto h-12"
                     />
@@ -176,9 +171,8 @@ const Navbar = () => {
                     <a
                       key={index}
                       href={link.href}
-                      className={`px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg ${
-                        'text-gray-800 hover:bg-gray-100 hover:text-[#aa9270]'
-                      }`}
+                      className={`px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg ${'text-gray-800 hover:bg-gray-100 hover:text-[#aa9270]'
+                        }`}
                     >
                       {link.label}
                     </a>

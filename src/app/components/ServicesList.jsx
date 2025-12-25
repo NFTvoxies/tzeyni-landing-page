@@ -18,48 +18,48 @@ const services = [
     price: 200.00,
     image: "/assets/image/massage.png"
   },
-    {
+  {
     id: 3,
     title: "Service de Maquillage",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 100.00,
     image: "/assets/image/maquillage.png"
-    },
-    {
+  },
+  {
     id: 4,
     title: "Service de Manucure",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 50.00,
     image: "/assets/image/manucure.png"
-    },
-    {
+  },
+  {
     id: 5,
     title: "Service de Pédicure",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 50.00,
     image: "/assets/image/pedicure.png"
-    },
-    {
+  },
+  {
     id: 6,
     title: "Service de Soin du Visage",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 100.00,
     image: "/assets/image/soin-visage.png"
-    },
-    {
+  },
+  {
     id: 7,
     title: "Service de Soin du Corps",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 150.00,
     image: "/assets/image/soin-corps.png"
-    },
-    {
+  },
+  {
     id: 8,
     title: "Service de Soin des Cheveux",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: 150.00,
     image: "/assets/image/soin-cheveux.png"
-    }
+  }
   // Add more services here...
 ];
 
@@ -73,8 +73,8 @@ const ServicesList = () => {
               <Image
                 src={service.image}
                 alt={service.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
             <div className="p-6">

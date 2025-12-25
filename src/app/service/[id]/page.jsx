@@ -1,7 +1,6 @@
 // src/app/service/[id]/page.jsx
 "use client";
 import { useState, useEffect } from "react";
-import Head from "next/head";
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import BookingSection from "@/app/components/BookingSection";
@@ -75,65 +74,60 @@ const services = [
 ];
 
 export default function ServiceDetails({ params }) {
-    const [service, setService] = useState(null);
-  
-    useEffect(() => {
-      const serviceId = parseInt(params.id);
-      const foundService = services.find(s => s.id === serviceId);
-      setService(foundService);
-    }, [params.id]);
-  
-    if (!service) {
-      return <div>Loading...</div>;
-    }
-  
-    return (
-      <>
-        <Head>
-          <title>{`TZEYNI | ${service.title}`}</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta charSet="UTF-8" />
-        </Head>
-        <Navbar />
-        <main className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white min-h-screen pt-20">
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="md:flex gap-8">
-              <div className="md:w-1/2">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  width={500}
-                  height={300}
-                  className="rounded-lg object-cover w-full h-[300px]"
-                />
+  const [service, setService] = useState(null);
+
+  useEffect(() => {
+    const serviceId = parseInt(params.id);
+    const foundService = services.find(s => s.id === serviceId);
+    setService(foundService);
+  }, [params.id]);
+
+  if (!service) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <>
+      <Navbar />
+      <main className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white min-h-screen pt-20">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="md:flex gap-8">
+            <div className="md:w-1/2">
+              <Image
+                src={service.image}
+                alt={service.title}
+                width={500}
+                height={300}
+                className="rounded-lg object-cover w-full h-[300px]"
+              />
+            </div>
+            <div className="md:w-1/2 mt-8 md:mt-0">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">{service.title}</h1>
+              <p className="text-xl text-gray-600 mb-6">{service.description}</p>
+              <p className="text-2xl font-bold text-[#aa9270] mb-8">MAD {service.price.toFixed(2)}</p>
+
+              {/* Additional Information Section */}
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h3 className="text-lg font-semibold text-gray-700">Bénéfices</h3>
+                <ul className="list-disc pl-5 text-gray-600">
+                  <li>Améliorez votre bien-être physique et mental.</li>
+                  <li>Utilisation de produits de haute qualité.</li>
+                  <li>Personnalisable selon vos besoins spécifiques.</li>
+                </ul>
               </div>
-              <div className="md:w-1/2 mt-8 md:mt-0">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">{service.title}</h1>
-                <p className="text-xl text-gray-600 mb-6">{service.description}</p>
-                <p className="text-2xl font-bold text-[#aa9270] mb-8">MAD {service.price.toFixed(2)}</p>
-                
-                {/* Additional Information Section */}
-                <div className="bg-white p-4 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-700">Bénéfices</h3>
-                  <ul className="list-disc pl-5 text-gray-600">
-                    <li>Améliorez votre bien-être physique et mental.</li>
-                    <li>Utilisation de produits de haute qualité.</li>
-                    <li>Personnalisable selon vos besoins spécifiques.</li>
-                  </ul>
-                </div>
-  
-                <div className="bg-white p-4 rounded-lg shadow-md mt-6 mb-3">
-                  <h3 className="text-lg font-semibold text-gray-700">Durée du Service</h3>
-                  <p className="text-gray-600">Environ 60-90 minutes, selon le traitement choisi.</p>
-                </div>
-  
-                <BookingSection service={service} />
+
+              <div className="bg-white p-4 rounded-lg shadow-md mt-6 mb-3">
+                <h3 className="text-lg font-semibold text-gray-700">Durée du Service</h3>
+                <p className="text-gray-600">Environ 60-90 minutes, selon le traitement choisi.</p>
               </div>
+
+              <BookingSection service={service} />
             </div>
           </div>
-        </main>
-        <Footer />
-      </>
-    );
-  }
-  
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
+

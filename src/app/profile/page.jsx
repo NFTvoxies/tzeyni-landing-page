@@ -1,8 +1,7 @@
 // src/app/profile/page.jsx
 "use client"
 import React, { useState, useEffect } from 'react';
-import Head from "next/head";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
@@ -58,11 +57,6 @@ export default function Profile() {
 
     return (
         <>
-            <Head>
-                <title>TZEYNI | Profil</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta charSet="UTF-8" />
-            </Head>
             <Navbar />
             <main className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white min-h-screen pt-20">
                 {/* Éléments de fond décoratifs */}

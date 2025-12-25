@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import ProducstList from "../components/ProductsList";
 import ProductFilter from "../components/ProductFilter";
 import Footer from "../components/Footer";
@@ -97,11 +96,6 @@ export default function Products() {
 
   return (
     <>
-      <Head>
-        <title>TZEYNI | Products</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charSet="UTF-8" />
-      </Head>
       <Navbar />
       <Box
         sx={{

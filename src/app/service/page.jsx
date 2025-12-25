@@ -1,18 +1,17 @@
 // src/app/services/page.jsx
-import Head from "next/head";
 import ServicesList from "../components/ServicesList";
 import ServiceFilter from "../components/ServiceFilter";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
+export const metadata = {
+  title: 'TZEYNI | Services',
+  description: 'Découvrez notre large gamme de services de beauté et de bien-être',
+};
+
 export default function Services() {
   return (
     <>
-      <Head>
-        <title>TZEYNI | Services</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charSet="UTF-8" />
-      </Head>
       <Navbar />
       <main className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white min-h-screen pt-20">
         {/* Decorative background elements */}

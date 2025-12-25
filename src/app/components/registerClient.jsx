@@ -123,9 +123,8 @@ const RegisterClient = () => {
                     {...field}
                     type="text"
                     id="full_name"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                      errors.full_name ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.full_name ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="John Doe"
                   />
                   {errors.full_name && (
@@ -152,9 +151,8 @@ const RegisterClient = () => {
                   <select
                     {...field}
                     id="gender"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                      errors.gender ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.gender ? "border-red-500" : "border-gray-300"
+                      }`}
                   >
                     <option value="">Select Gender</option>
                     <option value="Homme">Homme</option>
@@ -192,9 +190,8 @@ const RegisterClient = () => {
                       {...field}
                       type="email"
                       id="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                        errors.email ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.email ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="you@example.com"
                     />
                     <Icon
@@ -227,9 +224,8 @@ const RegisterClient = () => {
                     {...field}
                     type="tel"
                     id="phone"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                      errors.phone ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.phone ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="+1234567890"
                   />
                   {errors.phone && (
@@ -257,9 +253,8 @@ const RegisterClient = () => {
                     {...field}
                     type="text"
                     id="city"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                      errors.city ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.city ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="Your City"
                   />
                   {errors.city && (
@@ -286,9 +281,8 @@ const RegisterClient = () => {
                   <textarea
                     {...field}
                     id="addresse"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                      errors.addresse ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.addresse ? "border-red-500" : "border-gray-300"
+                      }`}
                     placeholder="Your Address"
                     rows="3"
                   ></textarea>
@@ -324,9 +318,8 @@ const RegisterClient = () => {
                       {...field}
                       type={isPasswordShown ? "text" : "password"}
                       id="password"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                        errors.password ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.password ? "border-red-500" : "border-gray-300"
+                        }`}
                       placeholder="••••••••"
                     />
                     <button
@@ -370,11 +363,10 @@ const RegisterClient = () => {
                       {...field}
                       type={isPasswordShown ? "text" : "password"}
                       id="confirmPassword"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${
-                        errors.confirmPassword
-                          ? "border-red-500"
-                          : "border-gray-300"
-                      }`}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.confirmPassword
+                        ? "border-red-500"
+                        : "border-gray-300"
+                        }`}
                       placeholder="••••••••"
                     />
                   </div>
@@ -400,7 +392,7 @@ const RegisterClient = () => {
               {dictionary?.links_text || "Already have an account?"}
             </p>
             <Link
-              href={`/auth/login`}
+              href={`/auth/login/client`}
               className="mt-2 inline-block text-[#aa9270] hover:underline"
             >
               Login here
@@ -415,9 +407,8 @@ const RegisterClient = () => {
         <Image
           src="/assets/image/tzeyni header bg.png" // Replace with your actual image path
           alt="Registration background"
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
+          fill
+          className="object-cover z-0"
         />
         <div className="absolute inset-0 bg-[#aa9270] opacity-20 z-20"></div>
         <div className="absolute inset-0 z-30">

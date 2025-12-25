@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ const ContactForm = () => {
     e.preventDefault();
     // Handle form submission here
     console.log(formData);
+    toast.success('Message envoyé avec succès');
   };
 
   return (

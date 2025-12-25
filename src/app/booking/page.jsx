@@ -2,7 +2,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Head from "next/head"
 import Navbar from '../components/Navbar';
 import BookingHistoryList from '../components/BookingHistoryList';
 import Footer from '../components/Footer';
@@ -30,18 +29,13 @@ function MyBookings() {
     const filterData = (type) => {
         return bookingHistory.filter(item =>
             type === 'terminé' ?
-            new Date(item.date) >= new Date() :
-            new Date(item.date) < new Date()
+                new Date(item.date) >= new Date() :
+                new Date(item.date) < new Date()
         );
     }
 
     return (
         <>
-            <Head>
-                <title>TZEYNI | Mes Réservations</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta charSet="UTF-8" />
-            </Head>
             <Navbar />
             <main className="relative bg-gradient-to-b from-[#e1c7b3] via-[#FCF9F7] to-white min-h-screen pt-20">
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -52,13 +46,13 @@ function MyBookings() {
                             <TabsTrigger value="terminé">Terminé</TabsTrigger>
                         </TabsList>
                         <TabsContent value="réservé">
-                            <BookingHistoryList 
+                            <BookingHistoryList
                                 bookingHistory={filterData('réservé')}
                                 type='réservé'
                             />
                         </TabsContent>
                         <TabsContent value="terminé">
-                            <BookingHistoryList 
+                            <BookingHistoryList
                                 bookingHistory={filterData('terminé')}
                                 type='terminé'
                             />
