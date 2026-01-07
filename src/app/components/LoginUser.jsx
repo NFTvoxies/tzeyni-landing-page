@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -28,10 +28,12 @@ const Login = ({ role = "client" }) => {
     },
   });
 
-  if (status === "authenticated") {
-    router.push(role === "professional" ? "http://localhost:3001/dashboard" : "/home");
-    return null;
-  }
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push(role === "professional" ? "/pro/dashboard" : "/dashboard");
+    }
+  }, [status, role, router]);
 
   const onSubmit = async (data) => {
     try {
@@ -45,7 +47,7 @@ const Login = ({ role = "client" }) => {
       if (result?.error) {
         setError(result.error);
       } else if (result.ok) {
-        router.push(role === "professional" ? "/dashboard" : "/home");
+        router.push(role === "professional" ? "/pro/dashboard" : "/dashboard");
       }
     } catch (error) {
       console.error("Login error:", error);

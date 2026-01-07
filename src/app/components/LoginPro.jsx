@@ -35,7 +35,7 @@ const LoginPro = () => {
   // Redirect if session is authenticated
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("http://localhost:3001/dashboard");
+      router.push("/pro/dashboard");
     }
   }, [status, router]);
 
@@ -51,7 +51,7 @@ const LoginPro = () => {
         setError(result.error);
       } else if (result.ok) {
         // Manually redirect after login
-        router.push("http://localhost:3001/dashboard");
+        router.push("/pro/dashboard");
       }
     } catch (error) {
       console.error("Login error:", error);

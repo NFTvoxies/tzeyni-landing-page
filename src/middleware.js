@@ -1,39 +1,61 @@
-import { withAuth } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
+import { NextResponse } from "next/server";
 
-export default withAuth({
-  pages: {
-    signIn: "/auth/choose-login",
-  },
-  callbacks: {
-    authorized: ({ token, req }) => {
-      const pathname = req.nextUrl.pathname;
+const isClientProtectedPath = (pathname) =>
+  pathname.startsWith("/dashboard") ||
+  pathname.startsWith("/profile") ||
+  pathname.startsWith("/bookings") ||
+  pathname.startsWith("/booking") ||
+  pathname.startsWith("/checkout") ||
+  pathname.startsWith("/favorites");
 
-      // Restrict access to certain paths based on user role
-      if (pathname.startsWith("/dashboard") && token?.role !== "professional") {
-        return false;
-      }
-      if (pathname.startsWith("/home") && token?.role !== "client") {
-        return false;
-      }
-      if (pathname.startsWith("/booking") && token?.role !== "client") {
-        return false;
-      }
-      if (pathname.startsWith("/profile") && token?.role !== "client") {
-        return false;
-      }
-      if (pathname.startsWith("/Products") && token?.role !== "client") {
-        return false;
-      }
-      if (pathname.startsWith("/checkout") && token?.role !== "client") {
-        return false;
-      }
+const isProfessionalProtectedPath = (pathname) => pathname.startsWith("/pro/") || pathname === "/pro";
+const isSalonAdminProtectedPath = (pathname) => pathname.startsWith("/salon/") || pathname === "/salon";
 
-      // Allow access if role matches the required page or for public pages
-      return true;
-    },
-  },
-});
+const redirectToLogin = (req) => {
+  const callbackUrl = `${req.nextUrl.pathname}${req.nextUrl.search}`;
+  const url = req.nextUrl.clone();
+  url.pathname = "/auth/choose-login";
+  url.searchParams.set("callbackUrl", callbackUrl);
+  return NextResponse.redirect(url);
+};
+
+export async function middleware(req) {
+  const pathname = req.nextUrl.pathname;
+
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET || "tzeyni-mock-secret-key-for-development",
+  });
+
+  if (!token) {
+    return redirectToLogin(req);
+  }
+
+  if (isProfessionalProtectedPath(pathname)) {
+    return token.role === "professional" ? NextResponse.next() : redirectToLogin(req);
+  }
+
+  if (isSalonAdminProtectedPath(pathname)) {
+    return token.role === "salon_admin" ? NextResponse.next() : redirectToLogin(req);
+  }
+
+  if (isClientProtectedPath(pathname)) {
+    return token.role === "client" ? NextResponse.next() : redirectToLogin(req);
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
-  matcher: ["/dashboard", "/profile", "/orders", "/booking", "/checkout", "/Products"],
+  matcher: [
+    "/dashboard/:path*",
+    "/profile/:path*",
+    "/bookings/:path*",
+    "/booking/:path*",
+    "/checkout/:path*",
+    "/favorites/:path*",
+    "/pro/:path*",
+    "/salon/:path*",
+  ],
 };

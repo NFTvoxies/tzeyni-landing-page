@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
-import axios from '@/axios'; // Import the axios instance
+import { mockSearch } from '@/lib/mockApi';
 
 const Hero = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -23,23 +23,19 @@ const Hero = () => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('/search', {
-        service: searchTerm,
-        addresse: locationTerm,
-      });
-      
-      // Handle the success response (you can redirect or show the results on this page)
-      console.log('Search results:', response.data);
-      
-      // Redirect to results page or display results (replace this with the relevant action)
-      // Example: router.push(`/search-results?service=${searchTerm}&location=${locationTerm}`);
-      
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        setErrorMessage('Aucun service correspondant à votre recherche.');
+      const result = await mockSearch(searchTerm, locationTerm);
+
+      if (result.data && result.data.length > 0) {
+        // Handle the success response
+        console.log('Search results:', result.data);
+        // You can redirect to results page or display results
+        // Example: router.push(`/search-results?service=${searchTerm}&location=${locationTerm}`);
       } else {
-        setErrorMessage('Une erreur s\'est produite. Veuillez réessayer.');
+        setErrorMessage('Aucun service correspondant à votre recherche.');
       }
+    } catch (error) {
+      console.error('Search error:', error);
+      setErrorMessage('Une erreur s\'est produite. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }

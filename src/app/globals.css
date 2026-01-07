@@ -4,7 +4,7 @@
 
 html, body {
   width: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 * {
@@ -14,5 +14,136 @@ html, body {
 @layer base {
   :root {
     --radius: 0.5rem;
+    
+    /* Brand Colors - Inspired by oklch reference theme */
+    --brand-primary: #C6934F; /* warm gold/amber */
+    --brand-primary-dark: #B8854A; /* darker gold */
+    --brand-secondary: #D4A574; /* lighter warm brown */
+    --brand-accent-light: #FFF4E6; /* very light cream */
+    --brand-accent-lighter: #FFE5CC; /* light peach */
+    
+    /* Backgrounds */
+    --background: #FDFCF8; /* warm cream/beige FDFCF8 - FFF9F5 */
+    --foreground: #1a1a1a; /* dark text */
+    
+    /* Cards */
+    --card: #FFFFFF; /* white cards */
+    --card-foreground: #1a1a1a; /* dark text on cards */
+    
+    /* Muted */
+    --muted: #F5F5F5; /* light gray */
+    --muted-foreground: #666666; /* medium gray text */
+    
+    /* Borders */
+    --border: #E5E5E5; /* light border */
+    --input: #E5E5E5; /* input border */
+    --ring: #C6934F; /* focus ring */
+    
+    /* Primary (warm gold) */
+    --primary: #C6934F; /* warm gold */
+    --primary-foreground: #FFFFFF; /* white text on primary */
+    
+    /* Secondary */
+    --secondary: #F5F5F5; /* light background */
+    --secondary-foreground: #1a1a1a; /* dark text */
+    
+    /* Accent */
+    --accent: #F5F5F5; /* light accent */
+    --accent-foreground: #1a1a1a; /* dark accent text */
+    
+    /* Destructive */
+    --destructive: #EF4444; /* red */
+    --destructive-foreground: #FFFFFF; /* white text */
+    
+    /* Success/Confirmation */
+    --success: #7ABD5C; /* green for "New" badges */
+    --success-foreground: #FFFFFF;
+  }
+}
+
+/* Dark mode support */
+.dark {
+  --background: #0F0F0F;
+  --foreground: #F5F5F5;
+  --card: #1A1A1A;
+  --card-foreground: #F5F5F5;
+  --muted: #2A2A2A;
+  --muted-foreground: #999999;
+  --border: #2A2A2A;
+  --input: #2A2A2A;
+  --secondary: #2A2A2A;
+  --secondary-foreground: #F5F5F5;
+  --accent: #2A2A2A;
+  --accent-foreground: #F5F5F5;
+}
+
+/* Ensure proper z-index layering */
+@layer utilities {
+  .z-navbar {
+    z-index: 50;
+  }
+  
+  .z-modal {
+    z-index: 100;
+  }
+  
+  .z-toast {
+    z-index: 150;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar for content areas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(198, 147, 79, 0.2);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(198, 147, 79, 0.4);
+}
+
+/* Brand color utilities for common use cases */
+@layer components {
+  .btn-primary {
+    @apply bg-[#C6934F] hover:bg-[#B8854A] text-white transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-[#FFF4E6] hover:bg-[#FFE5CC] text-[#C6934F] transition-colors;
+  }
+
+  .badge-new {
+    @apply bg-[#7ABD5C] text-white;
+  }
+
+  .badge-primary {
+    @apply bg-[#C6934F] text-white;
+  }
+
+  .card-accent {
+    @apply border-[#C6934F]/30 bg-[#FFF4E6];
   }
 }

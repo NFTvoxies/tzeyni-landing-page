@@ -1,6 +1,34 @@
 'use client'
 
 import { Icon } from "@iconify/react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+const MotionCounter = ({ value, suffix = "" }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 50,
+    stiffness: 200,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value);
+    }
+  }, [isInView, value, motionValue]);
+
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = Math.floor(latest) + suffix;
+      }
+    });
+  }, [springValue, suffix]);
+
+  return <span ref={ref} />;
+};
 
 const IconSection = () => {
   const features = [
@@ -66,16 +94,18 @@ const IconSection = () => {
         {/* Additional Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white/90">
           {[
-            { label: "Happy Clients", value: "2000+" },
-            { label: "Expert Stylists", value: "50+" },
-            { label: "Services", value: "100+" },
-            { label: "Years Experience", value: "10+" },
+            { label: "Happy Clients", value: 1000, suffix: "+" },
+            { label: "Expert Stylists", value: 50, suffix: "+" },
+            { label: "Services", value: 100, suffix: "+" },
+            { label: "Years Experience", value: 5, suffix: "+" },
           ].map((stat, index) => (
             <div
               key={index}
               className="p-4 rounded-lg bg-white/5 backdrop-blur-sm"
             >
-              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-2xl font-bold">
+                <MotionCounter value={stat.value} suffix={stat.suffix} />
+              </div>
               <div className="text-sm text-white/70">{stat.label}</div>
             </div>
           ))}
