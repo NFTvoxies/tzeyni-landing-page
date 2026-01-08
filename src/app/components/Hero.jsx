@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
+import { motion } from 'framer-motion';
 import { mockSearch } from '@/lib/mockApi';
 
 const Hero = () => {
@@ -53,26 +54,44 @@ const Hero = () => {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+        {/* Decorative circles */}
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#C6934F]/10" />
+        <div className="absolute top-60 -left-20 w-60 h-60 rounded-full bg-[#B8854A]/10" />
       </div>
 
       {/* Content container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[90vh] flex flex-col justify-center">
         {/* Hero text */}
-        <div className="max-w-3xl space-y-6 animate-fade-in-up mt-20">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+        <div className="max-w-3xl space-y-6 mt-20">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+          >
             <span className="text-white">Tzeyni</span>
             <br />
-            <span className="bg-gradient-to-r from-[#aa9270] to-[#d4bd9c] text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-[#C6934F] to-[#d4bd9c] text-transparent bg-clip-text">
               Votre Évasion Beauté chez Vous !
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg md:text-xl text-gray-200 max-w-2xl">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-200 max-w-2xl"
+          >
             Découvrez Votre Coiffeur Parfait pour une Beauté Sans Effort à Domicile
-          </p>
+          </motion.p>
 
           {/* Search container */}
-          <div className="mt-8 w-full max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-8 w-full max-w-3xl"
+          >
             <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-2xl transform transition-all duration-300 hover:shadow-3xl">
               <div className="grid md:grid-cols-2 gap-4">
                 {/* Service search */}
@@ -86,7 +105,7 @@ const Hero = () => {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Réservez votre service..."
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#aa9270] focus:ring-[#aa9270] transition-all duration-300 pr-10"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 pr-10"
                       onFocus={() => setIsSearchFocused(true)}
                       onBlur={() => setIsSearchFocused(false)}
                     />
@@ -105,7 +124,7 @@ const Hero = () => {
                       value={locationTerm}
                       onChange={(e) => setLocationTerm(e.target.value)}
                       placeholder="Où..."
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#aa9270] focus:ring-[#aa9270] transition-all duration-300 pr-10"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 pr-10"
                       onFocus={() => setIsLocationFocused(true)}
                       onBlur={() => setIsLocationFocused(false)}
                     />
@@ -117,7 +136,7 @@ const Hero = () => {
               {/* Search button */}
               <button
                 onClick={handleSearch}
-                className="w-full md:w-auto mt-4 px-8 py-3 bg-[#aa9270] hover:bg-[#8e7a5d] text-white rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 group"
+                className="w-full md:w-auto mt-4 px-8 py-3 bg-[#C6934F] hover:bg-[#B8854A] text-white rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 group"
               >
                 <span>{loading ? 'Recherche en cours...' : 'Trouvez Votre Coiffeur'}</span>
                 <Icon icon="typcn:arrow-right-outline" className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
@@ -126,24 +145,29 @@ const Hero = () => {
               {/* Error message */}
               {errorMessage && <p className="mt-4 text-red-600">{errorMessage}</p>}
             </div>
-          </div>
-
-          {/* Additional features */}
-          <div className="mt-8 flex flex-wrap gap-6">
-            <div className="flex items-center space-x-2 text-white/80">
-              <div className="w-2 h-2 bg-[#aa9270] rounded-full" />
-              <span>Coiffeurs Professionnels</span>
-            </div>
-            <div className="flex items-center space-x-2 text-white/80">
-              <div className="w-2 h-2 bg-[#aa9270] rounded-full" />
-              <span>Avis Vérifiés</span>
-            </div>
-            <div className="flex items-center space-x-2 text-white/80">
-              <div className="w-2 h-2 bg-[#aa9270] rounded-full" />
-              <span>Réservation Sécurisée</span>
-            </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Additional features */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-8 flex flex-wrap gap-6"
+        >
+          <div className="flex items-center space-x-2 text-white/80">
+            <div className="w-2 h-2 bg-[#C6934F] rounded-full" />
+            <span>Coiffeurs Professionnels</span>
+          </div>
+          <div className="flex items-center space-x-2 text-white/80">
+            <div className="w-2 h-2 bg-[#C6934F] rounded-full" />
+            <span>Avis Vérifiés</span>
+          </div>
+          <div className="flex items-center space-x-2 text-white/80">
+            <div className="w-2 h-2 bg-[#C6934F] rounded-full" />
+            <span>Réservation Sécurisée</span>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

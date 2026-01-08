@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
 
 const MotionCounter = ({ value, suffix = "" }) => {
   const ref = useRef(null);
@@ -36,7 +37,7 @@ const IconSection = () => {
       icon: "mage:gem-stone",
       title: "Quality Product",
       description: "Premium beauty services and products",
-      gradient: "from-[#AA9270] to-[#AA9270]",
+      gradient: "from-[#C6934F] to-[#C6934F]",
     },
     {
       icon: "bx:bxs-badge-check",
@@ -60,6 +61,14 @@ const IconSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header with Badge */}
+        <div className="text-center mb-12">
+          <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
+            Nos Atouts
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Pourquoi Choisir Tzeyni</h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div

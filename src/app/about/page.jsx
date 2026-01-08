@@ -328,7 +328,7 @@ export default function About() {
                   <Icon icon="solar:arrow-right-linear" className="h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/auth/professional">
+              <Link href="/auth/login/professional">
                 <Button size="lg" variant="default" className="border-white text-white hover:bg-white/20">
                   Devenir Professionnel
                 </Button>
