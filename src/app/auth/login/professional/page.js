@@ -1,5 +1,5 @@
-import Login from "@/app/components/LoginUser";
+import LoginPro from "@/app/components/LoginPro";
 
 export default function ProfessionalLoginPage() {
-  return <Login role="professional" />;
+  return <LoginPro />;
 }

@@ -72,7 +72,7 @@ const Hero = () => {
             <span className="text-white">Tzeyni</span>
             <br />
             <span className="bg-gradient-to-r from-[#C6934F] to-[#d4bd9c] text-transparent bg-clip-text">
-              Votre Évasion Beauté chez Vous !
+              La beauté à domicile, simplement.
             </span>
           </motion.h1>
 
@@ -82,7 +82,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-lg md:text-xl text-gray-200 max-w-2xl"
           >
-            Découvrez Votre Coiffeur Parfait pour une Beauté Sans Effort à Domicile
+            Réservez une coiffeuse, une manucure ou un soin beauté. Des professionnelles vérifiées, chez vous, au créneau qui vous convient.
           </motion.p>
 
           {/* Search container */}
@@ -104,7 +104,7 @@ const Hero = () => {
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="Réservez votre service..."
+                      placeholder="Service (coupe, brushing…)"
                       className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 pr-10"
                       onFocus={() => setIsSearchFocused(true)}
                       onBlur={() => setIsSearchFocused(false)}
@@ -123,7 +123,7 @@ const Hero = () => {
                       type="text"
                       value={locationTerm}
                       onChange={(e) => setLocationTerm(e.target.value)}
-                      placeholder="Où..."
+                      placeholder="Ville ou quartier"
                       className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 pr-10"
                       onFocus={() => setIsLocationFocused(true)}
                       onBlur={() => setIsLocationFocused(false)}
@@ -138,8 +138,8 @@ const Hero = () => {
                 onClick={handleSearch}
                 className="w-full md:w-auto mt-4 px-8 py-3 bg-[#C6934F] hover:bg-[#B8854A] text-white rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 group"
               >
-                <span>{loading ? 'Recherche en cours...' : 'Trouvez Votre Coiffeur'}</span>
-                <Icon icon="typcn:arrow-right-outline" className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+                <span>{loading ? 'Recherche en cours...' : 'Trouver votre pro maintenant'}</span>
+                {/* <Icon icon="typcn:arrow-right-outline" className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" /> */}
               </button>
 
               {/* Error message */}
@@ -157,7 +157,7 @@ const Hero = () => {
         >
           <div className="flex items-center space-x-2 text-white/80">
             <div className="w-2 h-2 bg-[#C6934F] rounded-full" />
-            <span>Coiffeurs Professionnels</span>
+            <span>Profils vérifiés</span>
           </div>
           <div className="flex items-center space-x-2 text-white/80">
             <div className="w-2 h-2 bg-[#C6934F] rounded-full" />

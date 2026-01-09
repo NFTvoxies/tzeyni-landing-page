@@ -44,7 +44,7 @@ const Navbar = ({ userType }) => {
     { href: '/browse', label: 'Services' },
     { href: '/Products', label: 'Produits' },
     { href: '/pricing', label: 'Abonnement' },
-    { href: '/FAQ', label: 'FAQ' },
+    { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' }
   ];
 

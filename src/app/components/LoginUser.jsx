@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { EyeIcon, EyeOffIcon, Sparkles } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
-import { Icon } from "@iconify/react";
 import { signIn, useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Login = ({ role = "client" }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -56,146 +59,148 @@ const Login = ({ role = "client" }) => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 lg:p-16">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Bienvenue dans {role === "professional" ? "votre espace professionnelle" : "votre espace client"}
-          </h1>
-          <p className="text-gray-600 mb-8">Connectez-vous à votre compte</p>
+    <div className="min-h-screen flex bg-[#FCF9F5]">
+      {/* Left side - Login Form */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 lg:p-16 animate-fadeIn">
+        <div className="w-full max-w-md animate-slideInLeft">
+          <Card className="border-none shadow-md rounded-[15px] hover:shadow-lg transition-shadow duration-500">
+            <CardHeader className="space-y-4">
+              {/* Tzeyni Branding */}
+              <Link href="/" className="inline-flex items-center gap-2 mb-2 group">
+                <Sparkles className="h-7 w-7 text-[#C6934F] transition-transform duration-300 group-hover:scale-110" />
+                <span className="font-serif text-2xl font-bold text-foreground">Tzeyni</span>
+              </Link>
 
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6"
-              role="alert"
-            >
-              <p>{error}</p>
-            </motion.div>
-          )}
+              <div>
+                <CardTitle className="text-2xl">
+                  {role === "professional" ? "Espace Professionnel" : "Espace Client"}
+                </CardTitle>
+                <CardDescription className="text-base mt-1.5">
+                  Connectez-vous à votre compte
+                </CardDescription>
+              </div>
+            </CardHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: "L'email est requis",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Adresse email invalide",
-                },
-              }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <div className="relative">
-                    <input
-                      {...field}
-                      type="email"
-                      id="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.email ? "border-red-500" : "border-gray-300"
-                        }`}
-                      placeholder="vous@example.com"
-                    />
-                    <Icon icon="mdi:email" className="absolute right-3 top-2.5 text-gray-400" />
-                  </div>
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                  )}
+            <CardContent>
+              {error && (
+                <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded animate-shake">
+                  <p className="text-sm">{error}</p>
                 </div>
               )}
-            />
 
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: "Le mot de passe est requis" }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Mot de passe
-                  </label>
-                  <div className="relative">
-                    <input
-                      {...field}
-                      type={isPasswordShown ? "text" : "password"}
-                      id="password"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? "border-red-500" : "border-gray-300"
-                        }`}
-                      placeholder="••••••••"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleClickShowPassword}
-                      className="absolute right-3 top-2.5 text-gray-400"
-                    >
-                      <Icon icon={isPasswordShown ? "mdi:eye-off" : "mdi:eye"} />
-                    </button>
-                  </div>
-                  {errors.password && (
-                    <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                {/* Email Field */}
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: "L'email est requis",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Adresse email invalide",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <div className="space-y-1">
+                      <Label htmlFor="email" className="leading-5">
+                        Adresse email*
+                      </Label>
+                      <Input
+                        {...field}
+                        type="email"
+                        id="email"
+                        placeholder="vous@example.com"
+                        className={`transition-all duration-300 focus:ring-[#C6934F] ${errors.email ? "border-red-500" : ""}`}
+                      />
+                      {errors.email && (
+                        <p className="text-sm text-red-500">{errors.email.message}</p>
+                      )}
+                    </div>
                   )}
+                />
+
+                {/* Password Field */}
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={{ required: "Le mot de passe est requis" }}
+                  render={({ field }) => (
+                    <div className="space-y-1">
+                      <Label htmlFor="password" className="leading-5">
+                        Mot de passe*
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          {...field}
+                          type={isPasswordShown ? "text" : "password"}
+                          id="password"
+                          placeholder="••••••••••••••••"
+                          className={`pr-9 transition-all duration-300 focus:ring-[#C6934F] ${errors.password ? "border-red-500" : ""}`}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          type="button"
+                          onClick={handleClickShowPassword}
+                          className="text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent transition-colors duration-200"
+                        >
+                          {isPasswordShown ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                          <span className="sr-only">{isPasswordShown ? "Masquer le mot de passe" : "Afficher le mot de passe"}</span>
+                        </Button>
+                      </div>
+                      {errors.password && (
+                        <p className="text-sm text-red-500">{errors.password.message}</p>
+                      )}
+                    </div>
+                  )}
+                />
+
+                {/* Remember Me and Forgot Password */}
+                <div className="flex items-center justify-between gap-y-2">
+                  <div className="flex items-center gap-3">
+                    <Checkbox id="rememberMe" />
+                    <Label htmlFor="rememberMe" className="text-muted-foreground text-sm font-normal">
+                      Se souvenir de moi
+                    </Label>
+                  </div>
+
+                  <Link href="/auth/forgot_password" className="text-sm text-[#C6934F] hover:underline transition-all duration-200">
+                    Mot de passe oublié ?
+                  </Link>
                 </div>
-              )}
-            />
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="form-checkbox text-yellow-500" />
-                <span className="ml-2 text-sm text-gray-600">Se souvenir de moi</span>
-              </label>
-              <Link href="/auth/forgot_password" className="text-sm text-[#aa9270] hover:underline">
-                Mot de passe oublié ?
-              </Link>
-            </div>
+                {/* Submit Button */}
+                <Button type="submit" className="w-full bg-[#C6934F] hover:bg-[#B8854A] transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5">
+                  Connexion
+                </Button>
+              </form>
 
-            <button
-              type="submit"
-              className="w-full bg-[#aa9270] text-white py-2 px-4 rounded-lg hover:bg-[#aa9270] transition duration-200"
-            >
-              Connexion
-            </button>
-          </form>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">Vous n'avez pas de compte ?</p>
-            <div className="mt-3 space-x-4">
-              <Link
-                href={`/auth/register/client`}
-                className="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition duration-200 mb-2"
-              >
-                Inscription en tant que Client
-              </Link>
-              <Link
-                href={`/auth/register/professionnelle`}
-                className="inline-block bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-200"
-              >
-                Inscription en tant que Professionnel
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+              {/* Registration Links */}
+              <div className="mt-6 text-center">
+                <p className="text-sm text-muted-foreground mb-3">
+                  Vous n'avez pas de compte ?
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Link href="/auth/register/client" className="flex-1">
+                    <Button variant="outline" className="w-full hover:border-[#C6934F] transition-all duration-300">
+                      Inscription Client
+                    </Button>
+                  </Link>
+                  <Link href="/auth/register/professionnelle" className="flex-1">
+                    <Button variant="outline" className="w-full hover:border-[#C6934F] transition-all duration-300">
+                      Inscription Professionnel
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
-      {/* Right side - Image and Pattern */}
-      <div className="hidden lg:block w-1/2 bg-[#aa9270] relative overflow-hidden">
-        <div className="absolute inset-0 bg-opacity-30 z-10"></div>
-        <Image
-          src="/assets/image/tzeyni header bg.png" // Replace with your actual image path
-          alt="Login background"
-          fill
-          className="object-cover z-0"
-        />
-        <div className="absolute inset-0 bg-[#aa9270] opacity-20 z-20"></div>
-        <div className="absolute inset-0 z-30">
+      {/* Right side - Decorative */}
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#C6934F] to-[#B8854A] relative overflow-hidden items-center justify-center animate-fadeIn">
+        <div className="absolute inset-0 opacity-10">
           <svg
             className="h-full w-full"
             viewBox="0 0 100 100"
@@ -203,19 +208,83 @@ const Login = ({ role = "client" }) => {
           >
             <path
               d="M0 0 L50 100 L100 0 Z"
-              fill="rgba(255,255,255,0.1)"
-              stroke="rgba(255,255,255,0.2)"
+              fill="rgba(255,255,255,0.3)"
+              stroke="rgba(255,255,255,0.4)"
               vectorEffect="non-scaling-stroke"
             />
           </svg>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-40">
-          <h2 className="text-3xl font-bold mb-2">Bienvenue sur notre plateforme</h2>
-          <p>
-            Connectez-vous, collaborez et développez-vous avec notre communauté de professionnels et de clients.
+        <div className="relative z-10 text-white text-center px-12 max-w-md animate-slideInRight">
+          <h2 className="text-4xl font-serif font-bold mb-4">Bienvenue sur Tzeyni</h2>
+          <p className="text-lg opacity-90">
+            {role === "professional"
+              ? "Gérez votre activité et développez votre clientèle avec notre plateforme professionnelle."
+              : "Réservez des services de beauté à domicile avec les meilleurs professionnels."}
           </p>
         </div>
       </div>
+
+      {/* CSS for animations */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes shake {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          25% {
+            transform: translateX(-5px);
+          }
+          75% {
+            transform: translateX(5px);
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out;
+        }
+        
+        .animate-slideInLeft {
+          animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .animate-slideInRight {
+          animation: slideInRight 0.8s ease-out;
+        }
+        
+        .animate-shake {
+          animation: shake 0.4s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 };

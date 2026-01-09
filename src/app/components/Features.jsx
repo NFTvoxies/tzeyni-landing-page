@@ -12,26 +12,38 @@ const featuresData = [
     image: "/assets/image/téléchargement.jpg",
     title: "Balinese Massage",
     description: "Détente profonde, Amélioration de la circulation, Équilibre énergétique",
+    price: "199",
+    duration: "45 min",
+    price: "199",
+    duration: "45 min",
   },
   {
     image: "/assets/image/images.jpg",
     title: "Waxing Full Body",
     description: "Épilation durable, Peau douce et lisse, Réduction des poils incarnés",
+    price: "129",
+    duration: "65 min",
   },
   {
     image: "/assets/image/images (1).jpg",
     title: "Glow Peel",
     description: "Éclat instantané, Réduction des imperfections, Hydratation",
+    price: "80",
+    duration: "30 min",
   },
   {
     image: "/assets/image/71qX8NpAHVL._AC_UF1000,1000_QL80_.jpg",
     title: "Keratin Hair Spa",
     description: "Lissage durable, Hydratation intense, Protection",
+    price: "55",
+    duration: "15 min",
   },
   {
     image: "/assets/image/6-manfaat-manicure-pedicure-bagi-kesehatan.jpg",
     title: "Menipedi",
     description: "Soins des ongles, Hydratation de la peau, Détente et relaxation",
+    price: "199",
+    duration: "65 min",
   },
 ];
 
@@ -138,15 +150,15 @@ const Features = () => {
                   </CardContent>
 
                   <CardFooter className="pt-0 pb-4">
-                    <Button
-                      className="w-full bg-[#C6934F] hover:bg-[#B8854A] text-white shadow-sm hover:shadow-md transition-all duration-300 group/btn h-9 text-sm"
-                    >
-                      <span>Réserver</span>
-                      <Icon
-                        icon="solar:arrow-right-linear"
-                        className="ml-1 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"
-                      />
-                    </Button>
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-full text-[11px] font-medium">
+                        <Icon icon="solar:clock-circle-linear" className="mr-1 w-3.5 h-3.5" />
+                        {feature.duration || "45 min"}
+                      </div>
+                      <div className="bg-[#C6934F]/10 text-[#C6934F] px-2.5 py-1 rounded-full text-[11px] font-bold">
+                        À partir de {feature.price || "10000"} MAD
+                      </div>
+                    </div>
                   </CardFooter>
                 </Card>
               </motion.div>
@@ -172,7 +184,7 @@ const Features = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
         >
-          <a href="/service">
+          <a href="/browse">
             <Button
               variant="outline"
               size="lg"
