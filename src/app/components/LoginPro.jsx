@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon, Sparkles, ArrowLeft } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
@@ -58,7 +59,7 @@ const LoginPro = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#FCF9F5] relative">
+    <div className="min-h-screen flex bg-[--background] relative">
       {/* Back to website link */}
       <Link href="/" className="absolute top-6 left-6 text-gray-600 hover:text-gray-900 flex items-center gap-2 text-sm z-50 transition-colors duration-300">
         <ArrowLeft className="h-4 w-4" />
@@ -78,31 +79,14 @@ const LoginPro = () => {
             <div className="bg-gray-100 rounded-lg p-1">
               {/* Dashboard preview image placeholder */}
               <div className="bg-white rounded aspect-video w-[500px] overflow-hidden relative border border-gray-200">
-                {/* Simulated dashboard content */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 p-4">
-                  <div className="grid grid-cols-4 gap-2 mb-3">
-                    {["Dashboard", "Books", "Mail", "Component"].map((tab, i) => (
-                      <div key={i} className={`text-xs ${i === 0 ? 'text-[#C6934F] font-semibold' : 'text-gray-500'} p-2`}>{tab}</div>
-                    ))}
-                  </div>
-
-                  {/* Stats cards */}
-                  <div className="grid grid-cols-4 gap-2 mb-3">
-                    {[{ val: "$15.5k", label: "Total Sales" }, { val: "1250", label: "Net Sales" }, { val: "$20.54k", label: "Total Net" }, { val: "$1,200", label: "Revenue" }].map((stat, i) => (
-                      <div key={i} className="bg-white rounded p-2 shadow-sm border border-gray-200">
-                        <div className="text-[#C6934F] text-xs font-semibold">{stat.val}</div>
-                        <div className="text-gray-500 text-[10px]">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Graph placeholder */}
-                  <div className="bg-white rounded h-24 mb-2 flex items-end p-2 gap-1 shadow-sm border border-gray-200">
-                    {[20, 35, 45, 30, 50, 40, 35, 45, 40].map((h, i) => (
-                      <div key={i} className="flex-1 bg-[#C6934F]/30 rounded-t" style={{ height: `${h}%` }}></div>
-                    ))}
-                  </div>
-                </div>
+                {/* Dashboard screenshot */}
+                <Image
+                  src="/assets/image/login/dashboard tzeyni pro.png"
+                  alt="Tzeyni Pro Dashboard Preview"
+                  fill
+                  className="contain"
+                  priority
+                />
               </div>
             </div>
 
