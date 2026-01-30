@@ -104,7 +104,7 @@ const FavoriteProfessionalCard = ({ professional }) => (
                             <span className="text-sm text-neutral-600">{professional.rating}</span>
                         </div>
                     </div>
-                    <Link href={`/service/${professional.id}`}>
+                    <Link href={`/professional/${professional.id}`}>
                         <Button size="sm" className="bg-[#C6934F] hover:bg-[#B8854A] text-white border-none">
                             Book
                         </Button>
@@ -137,7 +137,7 @@ export default function ClientDashboard() {
     const userName = session?.user?.name?.split(' ')[0] || 'Client';
 
     return (
-        <main className="min-h-screen bg-[#FFF9F5] pt-24 pb-12">
+        <main className="min-h-screen bg-[--background] pt-24 pb-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Welcome Header */}
                 <motion.div
@@ -163,7 +163,7 @@ export default function ClientDashboard() {
                     <QuickAction
                         icon="solar:calendar-linear"
                         label="Book a Service"
-                        href="/service"
+                        href="/browse"
                         iconBg="bg-[#FFF4E6]"
                         iconColor="text-[#C6934F]"
                     />
@@ -214,7 +214,7 @@ export default function ClientDashboard() {
                                     <CardContent className="p-8 text-center">
                                         <Icon icon="solar:calendar-search-linear" className="w-12 h-12 text-neutral-300 mx-auto mb-3" />
                                         <p className="text-neutral-500 mb-4">Aucune réservation à venir</p>
-                                        <Link href="/service">
+                                        <Link href="/browse">
                                             <Button className="bg-[#C6934F] hover:bg-[#B8854A] text-white border-none">
                                                 Book Now
                                             </Button>
@@ -250,7 +250,7 @@ export default function ClientDashboard() {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <Link href={`/service/${booking.professionalId}`}>
+                                                <Link href={`/professional/${booking.professionalId}`}>
                                                     <Button variant="ghost" size="sm" className="text-[#C6934F] hover:text-[#B8854A] hover:bg-[#FFF4E6] font-medium">
                                                         Book Again
                                                     </Button>
@@ -293,7 +293,7 @@ export default function ClientDashboard() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
                         >
-                            <Card className="bg-gradient-to-br from-[#C6934F] to-[#D4A574] border-none text-white overflow-hidden">
+                            <Card className="bg-gradient-to-br from-[#C6934F] to-[#010101] border-none text-white overflow-hidden">
                                 <CardContent className="p-6">
                                     <h3 className="font-semibold text-lg mb-2">Parrainez vos amis 🎁</h3>
                                     <p className="text-white/80 text-sm mb-4">

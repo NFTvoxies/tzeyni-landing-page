@@ -67,7 +67,7 @@ const Login = ({ role = "client" }) => {
             <CardHeader className="space-y-4">
               {/* Tzeyni Branding */}
               <Link href="/" className="inline-flex items-center gap-2 mb-2 group">
-                <Sparkles className="h-7 w-7 text-[#C6934F] transition-transform duration-300 group-hover:scale-110" />
+                {/* <Sparkles className="h-7 w-7 text-[#C6934F] transition-transform duration-300 group-hover:scale-110" /> */}
                 <span className="font-serif text-2xl font-bold text-foreground">Tzeyni</span>
               </Link>
 
@@ -199,23 +199,14 @@ const Login = ({ role = "client" }) => {
       </div>
 
       {/* Right side - Decorative */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#C6934F] to-[#B8854A] relative overflow-hidden items-center justify-center animate-fadeIn">
-        <div className="absolute inset-0 opacity-10">
-          <svg
-            className="h-full w-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 0 L50 100 L100 0 Z"
-              fill="rgba(255,255,255,0.3)"
-              stroke="rgba(255,255,255,0.4)"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-        </div>
+      <div className="hidden lg:flex w-1/2 relative overflow-hidden items-center justify-center animate-fadeIn">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-90"
+          style={{ backgroundImage: "url('/assets/image/login/banner_login_client.webp')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#C6934F]/70 to-[#B8854A]/70 mix-blend-multiply" />
         <div className="relative z-10 text-white text-center px-12 max-w-md animate-slideInRight">
-          <h2 className="text-4xl font-serif font-bold mb-4">Bienvenue sur Tzeyni</h2>
+          <h2 className="text-5xl font-bold mb-4">Bienvenue sur Tzeyni</h2>
           <p className="text-lg opacity-90">
             {role === "professional"
               ? "Gérez votre activité et développez votre clientèle avec notre plateforme professionnelle."

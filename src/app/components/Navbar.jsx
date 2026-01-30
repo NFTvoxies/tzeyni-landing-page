@@ -42,7 +42,7 @@ const Navbar = ({ userType }) => {
     { href: '/home', label: 'Accueil' },
     { href: '/about', label: 'À propos' },
     { href: '/browse', label: 'Services' },
-    { href: '/Products', label: 'Produits' },
+    { href: '/products', label: 'Produits' },
     { href: '/pricing', label: 'Abonnement' },
     { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' }
@@ -78,6 +78,7 @@ const Navbar = ({ userType }) => {
     { href: '/dashboard', label: 'Tableau de bord', icon: 'solar:widget-linear' },
     { href: '/bookings', label: 'Mes réservations', icon: 'solar:calendar-linear' },
     { href: '/favorites', label: 'Mes favoris', icon: 'solar:heart-linear' },
+    { href: '/reviews', label: 'Mes avis', icon: 'solar:hand-stars-outline' },
     { href: '/settings', label: 'Paramètres', icon: 'solar:settings-linear' }
   ];
 

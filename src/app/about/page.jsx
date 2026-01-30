@@ -75,7 +75,7 @@ export default function About() {
                 Notre Histoire
               </Badge>
               <h1 className="text-4xl md:text-6xl font-bold text-neutral-900 leading-tight mb-6">
-                Redéfinir les Services de Beauté pour les Femmes Modernes
+                Redéfinir les Services de Beauté pour les Femmes
               </h1>
               <p className="text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
                 Tzeyni connecte les clients avec des professionnels de beauté vérifiés qui se déplacent directement à domicile.
