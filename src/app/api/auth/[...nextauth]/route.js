@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { mockLogin } from "@/lib/mockApi";
+// This is a Next.js API route for authentication using NextAuth with a custom credentials provider.
 
 const handler = NextAuth({
   providers: [
