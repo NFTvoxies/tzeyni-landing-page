@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Controller, useForm } from "react-hook-form";
 import { Icon } from "@iconify/react";
-import axios from "../../axios";
+import { mockRegister } from "@/lib/mockApi";
 import toast from "react-hot-toast";
 
 const RegisterClient = () => {
@@ -49,7 +49,7 @@ const RegisterClient = () => {
     setSuccessMessage("");
 
     try {
-      const response = await axios.post("/api/user/register", {
+      const result = await mockRegister({
         full_name: data.full_name,
         gender: data.gender,
         email: data.email,
@@ -57,12 +57,9 @@ const RegisterClient = () => {
         city: data.city,
         addresse: data.addresse,
         password: data.password,
-        password_confirmation: data.confirmPassword,
-      });
+      }, 'client');
 
-      const result = response.data;
-
-      if (response.status === 200 && result.status) {
+      if (result.status) {
         toast.success(
           "Registration successful. Check your email for the verification code."
         );

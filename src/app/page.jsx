@@ -3,13 +3,13 @@ import IconSection from "./components/IconSection";
 import Features from "./components/Features";
 import Stylists from "./components/Stylists";
 import Testimonial from "./components/Testimonial";
-import Newsletter from "./components/Newsletter";
+import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 export const metadata = {
-  title: 'TZEYNI | Accueil',
-  description: 'Bienvenue sur TZEYNI - Services de beauté et bien-être',
+  title: 'Tzeyni | Accueil',
+  description: 'Bienvenue sur Tzeyni - Services de beauté et bien-être',
 };
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
       <Features />
       <Stylists />
       <Testimonial />
-      <Newsletter />
+      <CTA />
       <Footer />
     </>
   );

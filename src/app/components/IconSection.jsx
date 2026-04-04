@@ -1,6 +1,35 @@
 'use client'
 
 import { Icon } from "@iconify/react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
+
+const MotionCounter = ({ value, suffix = "" }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 50,
+    stiffness: 200,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value);
+    }
+  }, [isInView, value, motionValue]);
+
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = Math.floor(latest) + suffix;
+      }
+    });
+  }, [springValue, suffix]);
+
+  return <span ref={ref} />;
+};
 
 const IconSection = () => {
   const features = [
@@ -8,7 +37,7 @@ const IconSection = () => {
       icon: "mage:gem-stone",
       title: "Quality Product",
       description: "Premium beauty services and products",
-      gradient: "from-[#AA9270] to-[#AA9270]",
+      gradient: "from-[#C6934F] to-[#C6934F]",
     },
     {
       icon: "bx:bxs-badge-check",
@@ -32,6 +61,14 @@ const IconSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header with Badge */}
+        <div className="text-center mb-12">
+          <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
+            Nos Atouts
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Pourquoi Choisir Tzeyni</h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
@@ -66,16 +103,18 @@ const IconSection = () => {
         {/* Additional Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white/90">
           {[
-            { label: "Happy Clients", value: "2000+" },
-            { label: "Expert Stylists", value: "50+" },
-            { label: "Services", value: "100+" },
-            { label: "Years Experience", value: "10+" },
+            { label: "Happy Clients", value: 1000, suffix: "+" },
+            { label: "Expert Stylists", value: 50, suffix: "+" },
+            { label: "Services", value: 100, suffix: "+" },
+            { label: "Years Experience", value: 5, suffix: "+" },
           ].map((stat, index) => (
             <div
               key={index}
               className="p-4 rounded-lg bg-white/5 backdrop-blur-sm"
             >
-              <div className="text-2xl font-bold">{stat.value}</div>
+              <div className="text-2xl font-bold">
+                <MotionCounter value={stat.value} suffix={stat.suffix} />
+              </div>
               <div className="text-sm text-white/70">{stat.label}</div>
             </div>
           ))}

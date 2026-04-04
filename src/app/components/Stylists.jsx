@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
+import { motion } from 'framer-motion';
+import { Badge } from '@/components/ui/badge';
 
 const stylistsData = [
   {
@@ -46,19 +48,28 @@ const Stylists = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
-    <section className="bg-[#323232] py-20 relative overflow-hidden">
+    <section className="relative bg-[#323232] py-20 overflow-hidden">
       {/* Motif de fond */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OC0xNCAxNC0xNHMxNCA2LjI2OCAxNCAxNHMtNi4yNjggMTQtMTQgMTR6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz48L2c+PC9zdmc+')] opacity-20" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Decorative circles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-20 w-80 h-80 rounded-full bg-[#C6934F]/10" />
+        <div className="absolute bottom-40 -left-20 w-60 h-60 rounded-full bg-[#B8854A]/10" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section d'en-tête */}
-        <div className="text-center mb-16 relative z-10">
+        <div className="text-center mb-16">
+          <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
+            Professionnels Vérifiés
+          </Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Rencontrez les Talents Stylists
             <br />
-            <span className="text-[#e7d1b4]">Pour ce Mois</span>
+            <span className="text-[#C6934F]">Pour ce Mois</span>
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto">
             Nos professionnels triés sur le volet apportent des années d'expertise et de passion à chaque service.
@@ -67,9 +78,13 @@ const Stylists = () => {
 
         {/* Grille des stylistes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {stylistsData.map((stylist) => (
-            <div
+          {stylistsData.map((stylist, idx) => (
+            <motion.div
               key={stylist.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
               className="relative group"
               onMouseEnter={() => setHoveredId(stylist.id)}
               onMouseLeave={() => setHoveredId(null)}
@@ -93,7 +108,7 @@ const Stylists = () => {
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-2xl font-bold text-gray-800">{stylist.name}</h3>
-                      <p className="text-[#e7d1b4] font-medium">{stylist.experience}</p>
+                      <p className="text-[#C6934F] font-medium">{stylist.experience}</p>
                     </div>
                     <div className="flex items-center space-x-1">
                       <Icon icon="solar:star-bold-duotone" className="w-5 h-5 text-yellow-400 fill-current" />
@@ -129,22 +144,22 @@ const Stylists = () => {
                   {/* Récompenses */}
                   <div className="flex items-center space-x-1">
                     {[...Array(stylist.awards)].map((_, i) => (
-                      <Icon icon="flowbite:award-outline" key={i} className="w-4 h-4 text-[#e7d1b4]" />
+                      <Icon icon="flowbite:award-outline" key={i} className="w-4 h-4 text-[#C6934F]" />
                     ))}
                   </div>
 
                   {/* Boutons d'action */}
                   <div className="flex gap-3 pt-4">
-                    <button className="flex-1 bg-[#e7d1b4] text-gray-800 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-[#d4b794]">
+                    <button className="flex-1 bg-[#C6934F] text-white py-3 rounded-xl font-medium transition-all duration-300 hover:bg-[#B8854A]">
                       Réserver Maintenant
                     </button>
-                    <button className="px-4 py-3 border-2 border-gray-200 rounded-xl transition-all duration-300 hover:border-[#e7d1b4] hover:text-[#e7d1b4]">
+                    <button className="px-4 py-3 border-2 border-gray-200 rounded-xl transition-all duration-300 hover:border-[#C6934F] hover:text-[#C6934F]">
                       <Icon icon="eva:message-circle-outline" className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

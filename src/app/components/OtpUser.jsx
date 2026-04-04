@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 // Hook Imports]
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { mockVerifyOtp, mockResendOtp } from "@/lib/mockApi";
 
 const OtpUser = () => {
   const router = useRouter();
@@ -42,19 +43,9 @@ const OtpUser = () => {
     const otpCode = data.otp.join("");
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/verify-email`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email, // Send email from the query parameter
-            code: otpCode, // Send the concatenated OTP code
-          }),
-        }
-      );
+      const result = await mockVerifyOtp(email, otpCode);
 
-      if (response.ok) {
+      if (result.status) {
         toast.success("Votre compte a été vérifié avec succès!");
 
         setIsLoading(true);
@@ -62,16 +53,13 @@ const OtpUser = () => {
 
         setTimeout(() => {
           router.push("/auth/login/client");
-        }, 3000);
+        }, 2000);
       } else {
-        const errorData = await response.json();
-        toast.error(
-          errorData.message || "Échec de la vérification de l'OTP. Veuillez réessayer."
-        );
+        toast.error(result.message || "Échec de la vérification de l'OTP. Veuillez réessayer.");
       }
     } catch (error) {
       console.error("Erreur lors de la vérification de l'OTP:", error);
-      toast.error("Une erreur s'est produite lors de la vérification de l'OTP.");
+      toast.error(error.response?.data?.message || "Une erreur s'est produite lors de la vérification de l'OTP.");
     }
   };
 
@@ -89,25 +77,13 @@ const OtpUser = () => {
 
   // Function to handle OTP resend
   const handleResendOtp = async () => {
-    const api = await getApi();
-
     try {
-      const response = await fetch(
-        `${api}/v1/auth/verify-email/${encodeURIComponent(email)}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const result = await mockResendOtp(email);
 
-      if (response.ok) {
+      if (result.status) {
         toast.success("Un nouvel OTP a été envoyé à votre adresse e-mail!");
       } else {
-        const errorData = await response.json();
-
-        toast.error(
-          errorData.message || "Échec de la réexpédition de l'OTP. Veuillez réessayer."
-        );
+        toast.error(result.message || "Échec de la réexpédition de l'OTP. Veuillez réessayer.");
       }
     } catch (error) {
       console.error("Erreur lors de la réexpédition de l'OTP:", error);
@@ -159,9 +135,8 @@ const OtpUser = () => {
           <button
             type="submit"
             disabled={watchOtp.some((otp) => !otp)}
-            className={`w-full py-3 bg-[#aa9270] text-white rounded-lg font-semibold hover:bg-[#936c4e] transition duration-200 ${
-              watchOtp.some((otp) => !otp) && 'opacity-50 cursor-not-allowed'
-            }`}
+            className={`w-full py-3 bg-[#aa9270] text-white rounded-lg font-semibold hover:bg-[#936c4e] transition duration-200 ${watchOtp.some((otp) => !otp) && 'opacity-50 cursor-not-allowed'
+              }`}
           >
             Vérifier mon compte
           </button>

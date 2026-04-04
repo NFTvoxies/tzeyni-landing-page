@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import { Controller, useForm } from 'react-hook-form'
 import { Icon } from '@iconify/react'
 import toast from 'react-hot-toast'
-import axios from '../../axios'
+import { mockRegister } from '@/lib/mockApi'
 
 const Register = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
@@ -46,7 +46,7 @@ const Register = () => {
     setError("");
 
     try {
-      const response = await axios.post("/api/professional/register", {
+      const result = await mockRegister({
         full_name: data.full_name,
         gender: data.gender,
         email: data.email,
@@ -54,12 +54,9 @@ const Register = () => {
         city: data.city,
         addresse: data.addresse,
         password: data.password,
-        password_confirmation: data.confirmPassword,
-      });
+      }, 'professional');
 
-      const result = response.data;
-
-      if (response.status === 200 && result.status) {
+      if (result.status) {
         toast.success("Registration successful! Please verify your email to continue");
 
         router.push(`/auth/professional/verify-otp?email=${encodeURIComponent(data.email)}`);
