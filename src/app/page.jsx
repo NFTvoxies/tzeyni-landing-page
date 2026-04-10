@@ -8,20 +8,23 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 
 export const metadata = {
-  title: 'Tzeyni | Accueil',
-  description: 'Bienvenue sur Tzeyni - Services de beauté et bien-être',
+  title: 'Tzeyni | La beauté à domicile, simplement',
+  description: 'Réservez une coiffeuse, une manucure ou un soin beauté à domicile. Professionnelles vérifiées, chez vous, au créneau qui vous convient.',
+  keywords: 'beauté, domicile, coiffure, maquillage, massage, manucure, Maroc, Casablanca',
 };
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <IconSection />
-      <Features />
-      <Stylists />
-      <Testimonial />
-      <CTA />
+      <main>
+        <Hero />
+        <IconSection />
+        <Features />
+        <Stylists />
+        <Testimonial />
+        <CTA />
+      </main>
       <Footer />
     </>
   );

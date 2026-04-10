@@ -3,200 +3,177 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
 const featuresData = [
   {
     image: "/assets/image/téléchargement.jpg",
-    title: "Balinese Massage",
-    description: "Détente profonde, Amélioration de la circulation, Équilibre énergétique",
+    title: "Massage Balinais",
+    description: "Détente profonde, amélioration de la circulation, équilibre énergétique",
     price: "199",
     duration: "45 min",
-    price: "199",
-    duration: "45 min",
+    category: "Massage",
   },
   {
     image: "/assets/image/images.jpg",
-    title: "Waxing Full Body",
-    description: "Épilation durable, Peau douce et lisse, Réduction des poils incarnés",
+    title: "Épilation Complète",
+    description: "Épilation durable, peau douce et lisse, réduction des poils incarnés",
     price: "129",
     duration: "65 min",
+    category: "Soins Corps",
   },
   {
     image: "/assets/image/images (1).jpg",
     title: "Glow Peel",
-    description: "Éclat instantané, Réduction des imperfections, Hydratation",
+    description: "Éclat instantané, réduction des imperfections, hydratation profonde",
     price: "80",
     duration: "30 min",
+    category: "Soins Visage",
   },
   {
     image: "/assets/image/71qX8NpAHVL._AC_UF1000,1000_QL80_.jpg",
-    title: "Keratin Hair Spa",
-    description: "Lissage durable, Hydratation intense, Protection",
+    title: "Soin Kératine",
+    description: "Lissage durable, hydratation intense, protection longue durée",
     price: "55",
     duration: "15 min",
+    category: "Cheveux",
   },
   {
     image: "/assets/image/6-manfaat-manicure-pedicure-bagi-kesehatan.jpg",
-    title: "Menipedi",
-    description: "Soins des ongles, Hydratation de la peau, Détente et relaxation",
+    title: "Manucure & Pédicure",
+    description: "Soins des ongles, hydratation de la peau, détente et relaxation",
     price: "199",
     duration: "65 min",
+    category: "Ongles",
   },
 ];
 
 const Features = () => {
-  const scrollContainerRef = useRef(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const scroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, clientWidth } = scrollContainerRef.current;
-      const scrollTo = direction === "left" ? scrollLeft - clientWidth : scrollLeft + clientWidth;
-
-      scrollContainerRef.current.scrollTo({
-        left: scrollTo,
-        behavior: "smooth",
-      });
-
-      setScrollPosition(scrollTo);
-    }
-  };
-
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      setScrollPosition(scrollContainerRef.current.scrollLeft);
-    }
-  };
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="relative bg-[#FAF8F5] py-20">
+    <section className="relative bg-gradient-to-b from-[#FBF8F4] via-[#FDFCF8] to-[#F8F5F0] py-24 overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#C6934F]/10 blur-3xl" />
-        <div className="absolute top-60 -left-20 w-60 h-60 rounded-full bg-[#B8854A]/10 blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-40 h-40 rounded-full bg-[#C6934F]/5 blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#C6934F]/8 to-transparent blur-3xl" />
+        <div className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#B8854A]/6 to-transparent blur-3xl" />
+        {/* Decorative lines */}
+        <div className="absolute top-32 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#C6934F]/10 to-transparent" />
+        <div className="absolute bottom-32 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#C6934F]/10 to-transparent" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-16 space-y-4">
-          <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 space-y-4"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C6934F]/10 text-[#C6934F] text-sm font-medium">
+            <Icon icon="solar:star-shine-bold" className="w-4 h-4" />
             Services Premium
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900">
-            Caractéristiques Spéciales
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 font-playfair">
+            Nos Services{' '}
+            <span className="text-gradient-gold">d&apos;Exception</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-neutral-600 text-lg">
-            Tzeyni apporte l'expérience du salon à vous, où que vous soyez. Dites
-            adieu aux tracas de la prise de rendez-vous et des déplacements vers un salon.
+          <p className="max-w-2xl mx-auto text-neutral-500 text-lg">
+            Tzeyni apporte l'expérience du salon chez vous. Dites adieu aux tracas et profitez de services premium à domicile.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Horizontal Scrolling Carousel */}
-        <div className="relative">
-          {/* Left Navigation Button */}
-          <motion.button
-            onClick={() => scroll("left")}
-            disabled={scrollPosition <= 0}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <Icon icon="solar:alt-arrow-left-bold" className="w-6 h-6 text-[#C6934F]" />
-          </motion.button>
-
-          {/* Scrollable Container */}
-          <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 px-12"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {featuresData.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex-none w-[280px] snap-start"
-              >
-                <Card className="group h-full bg-white/70 backdrop-blur-sm border-neutral-200 hover:border-[#C6934F]/50 transition-all duration-300 hover:shadow-xl">
-                  {/* Compact Image - Smaller height */}
-                  <div className="relative h-40 w-full overflow-hidden rounded-t-lg">
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+        {/* Staggered Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuresData.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className={`group relative ${index === 0 ? 'lg:row-span-2' : ''}`}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className={`relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-100 hover:border-[#C6934F]/20 ${index === 0 ? 'h-full' : ''}`}>
+                {/* Image */}
+                <div className={`relative overflow-hidden ${index === 0 ? 'h-64 lg:h-[55%]' : 'h-48'}`}>
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                  
+                  {/* Category badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-[#C6934F] shadow-sm backdrop-blur-sm">
+                      {feature.category}
+                    </span>
                   </div>
 
-                  <CardHeader className="pb-2 pt-4">
-                    <CardTitle className="text-lg font-bold text-neutral-900 group-hover:text-[#C6934F] transition-colors line-clamp-1">
-                      {feature.title}
-                    </CardTitle>
-                  </CardHeader>
+                  {/* Quick book button on hover */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={hoveredIndex === index ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute bottom-4 left-4 right-4 z-10"
+                  >
+                    <Link href="/browse" className="block w-full py-3 bg-white/95 backdrop-blur-sm text-[#C6934F] rounded-xl text-center font-semibold text-sm hover:bg-white transition-colors shadow-lg">
+                      Réserver maintenant →
+                    </Link>
+                  </motion.div>
+                </div>
 
-                  <CardContent className="pb-3">
-                    <CardDescription className="text-neutral-600 text-sm leading-relaxed line-clamp-2">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
+                {/* Content */}
+                <div className="p-5 space-y-3">
+                  <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#C6934F] transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-neutral-500 text-sm leading-relaxed line-clamp-2">
+                    {feature.description}
+                  </p>
 
-                  <CardFooter className="pt-0 pb-4">
-                    <div className="flex items-center justify-between w-full">
-                      <div className="flex items-center bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-full text-[11px] font-medium">
-                        <Icon icon="solar:clock-circle-linear" className="mr-1 w-3.5 h-3.5" />
-                        {feature.duration || "45 min"}
-                      </div>
-                      <div className="bg-[#C6934F]/10 text-[#C6934F] px-2.5 py-1 rounded-full text-[11px] font-bold">
-                        À partir de {feature.price || "10000"} MAD
-                      </div>
+                  {/* Price & Duration bar */}
+                  <div className="flex items-center justify-between pt-3 border-t border-neutral-100">
+                    <div className="flex items-center gap-1.5 text-neutral-400 text-xs">
+                      <Icon icon="solar:clock-circle-bold-duotone" className="w-4 h-4 text-[#C6934F]/60" />
+                      <span>{feature.duration}</span>
                     </div>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right Navigation Button */}
-          <motion.button
-            onClick={() => scroll("right")}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
-          >
-            <Icon icon="solar:alt-arrow-right-bold" className="w-6 h-6 text-[#C6934F]" />
-          </motion.button>
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs text-neutral-400">À partir de</span>
+                      <span className="text-lg font-bold text-[#C6934F]">{feature.price}</span>
+                      <span className="text-xs text-neutral-400">MAD</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* View All Services Button */}
         <motion.div
-          className="mt-12 text-center"
+          className="mt-14 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.3 }}
         >
-          <a href="/browse">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-[#C6934F] text-[#C6934F] hover:bg-[#C6934F] hover:text-white transition-all duration-300 px-8 group"
-            >
-              <span className="font-semibold">Voir Tous les Services</span>
+          <Link href="/browse">
+            <button className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-[#C6934F] text-[#C6934F] rounded-full font-semibold hover:bg-[#C6934F] hover:text-white transition-all duration-300 hover:shadow-glow">
+              <span>Voir Tous les Services</span>
               <Icon
                 icon="solar:arrow-right-linear"
-                className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
               />
-            </Button>
-          </a>
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

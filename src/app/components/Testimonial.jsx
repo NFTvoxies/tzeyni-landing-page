@@ -1,9 +1,8 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Badge } from '@/components/ui/badge';
 
 const testimonials = [
     {
@@ -11,9 +10,9 @@ const testimonials = [
         image: '/assets/image/testimonial1.jpeg',
         name: 'Sarah Johnson',
         pronoun: 'Elle',
-        location: 'Maroc, Casablanca',
+        location: 'Casablanca',
         title: 'Tzeyni a transformé mon look entier',
-        text: "Absolument ravie de mon expérience chez Tzeyni ! L'attention aux détails et les soins personnalisés que j'ai reçus étaient exceptionnels. Mon styliste a pris le temps de comprendre exactement ce que je voulais et a dépassé mes attentes. L'atmosphère était luxueuse et accueillante.",
+        text: "Absolument ravie de mon expérience chez Tzeyni ! L'attention aux détails et les soins personnalisés que j'ai reçus étaient exceptionnels. Mon styliste a pris le temps de comprendre exactement ce que je voulais et a dépassé mes attentes.",
         rating: 5,
         date: 'il y a 2 semaines',
         serviceType: 'Coiffure & Coloration'
@@ -21,99 +20,119 @@ const testimonials = [
     {
         id: 2,
         image: '/assets/image/testimonial2.png',
-        name: 'Michael Chen',
-        pronoun: 'Il',
-        location: 'Maroc, Rabat',
+        name: 'Marie Chen',
+        pronoun: 'Elle',
+        location: 'Rabat',
         title: 'Service professionnel qui dépasse les attentes',
-        text: "Le niveau d'expertise chez Tzeyni est inégalé. J'ai été dans de nombreux salons, mais aucun ne se compare à la qualité et au professionnalisme que j'ai expérimentés ici. La connaissance et la technique du styliste étaient impressionnantes, et les résultats parlent d'eux-mêmes.",
-        rating: 4,
+        text: "Le niveau d'expertise chez Tzeyni est inégalé. J'ai été dans de nombreux salons, mais aucun ne se compare à la qualité et au professionnalisme. La connaissance et la technique de la styliste étaient impressionnantes.",
+        rating: 5,
         date: 'il y a 1 mois',
-        serviceType: 'Coupe de cheveux premium'
+        serviceType: 'Soins Cheveux Premium'
     },
     {
         id: 3,
         image: '/assets/image/testimonial3.png',
         name: 'Emma Martinez',
         pronoun: 'Elle',
-        location: 'Maroc, Marrakech',
+        location: 'Marrakech',
         title: 'Une expérience vraiment luxueuse',
-        text: "De la réservation au résultat final, tout était parfait. Le styliste était non seulement compétent mais aussi très agréable et a donné d'excellents conseils pour entretenir mon nouveau style. L'attention aux détails du salon est remarquable.",
+        text: "De la réservation au résultat final, tout était parfait. La styliste était non seulement compétente mais aussi très agréable et a donné d'excellents conseils pour entretenir mon nouveau style.",
         rating: 5,
         date: 'il y a 3 semaines',
-        serviceType: 'Traitement de beauté complet'
+        serviceType: 'Traitement Beauté Complet'
     }
 ];
 
+const slideVariants = {
+    enter: (direction) => ({
+        x: direction > 0 ? 200 : -200,
+        opacity: 0,
+        scale: 0.95,
+    }),
+    center: {
+        x: 0,
+        opacity: 1,
+        scale: 1,
+    },
+    exit: (direction) => ({
+        x: direction > 0 ? -200 : 200,
+        opacity: 0,
+        scale: 0.95,
+    }),
+};
+
 const Testimonial = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [direction, setDirection] = useState(0); // 1 for next, -1 for prev
+    const [direction, setDirection] = useState(1);
+    const [isPaused, setIsPaused] = useState(false);
 
-    const handleNext = () => {
+    const handleNext = useCallback(() => {
         setDirection(1);
         setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    };
+    }, []);
 
-    const handlePrev = () => {
+    const handlePrev = useCallback(() => {
         setDirection(-1);
         setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    };
+    }, []);
+
+    // Auto-slide
+    useEffect(() => {
+        if (isPaused) return;
+        const interval = setInterval(handleNext, 6000);
+        return () => clearInterval(interval);
+    }, [isPaused, handleNext]);
+
+    const currentTestimonial = testimonials[activeIndex];
 
     return (
-        <section className="relative bg-[#F5F1ED] py-20 overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OCAxNCAxNC0xNHMxNCA2LjI2OCAxNCAxNHMtNi4yNjggMTQtMTQgMTR6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz48L2c+PC9zdmc+')] opacity-20" />
-            </div>
-
-            {/* Decorative circles */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-[#C6934F]/10" />
-                <div className="absolute bottom-60 -left-20 w-60 h-60 rounded-full bg-[#B8854A]/10" />
+        <section className="relative bg-gradient-to-b from-[#F8F5F0] via-[#F5F1ED] to-[#FBF8F4] py-24 overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute -top-20 right-0 w-[500px] h-[500px] rounded-full bg-[#C6934F]/5 blur-3xl" />
+                <div className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full bg-[#B8854A]/5 blur-3xl" />
+                {/* Large quote decoration */}
+                <div className="absolute top-20 left-10 text-[200px] font-serif text-[#C6934F]/[0.03] leading-none select-none">"</div>
+                <div className="absolute bottom-20 right-10 text-[200px] font-serif text-[#C6934F]/[0.03] leading-none select-none rotate-180">"</div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header Section */}
-                <div className="text-center mb-16">
-                    <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
-                        Témoignages
-                    </Badge>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#2d2523] mb-6">
-                        Témoignages de Clients
-                        <br />
-                        <span className="text-[#C6934F]">Ce que disent nos clients</span>
-                    </h2>
-                    <p className="text-[#6e563a]/80 max-w-2xl mx-auto">
-                        Des histoires réelles de nos précieux clients sur leurs expériences transformantes avec nous.
-                    </p>
-                </div>
-
-                {/* Testimonial Card */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative max-w-4xl mx-auto"
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
                 >
-                    <div className="relative bg-[#1f1f1f] rounded-2xl shadow-xl overflow-hidden">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C6934F]/10 text-[#C6934F] text-sm font-medium mb-6">
+                        <Icon icon="solar:chat-round-like-bold" className="w-4 h-4" />
+                        Témoignages
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 font-playfair mb-4">
+                        Ce Que Disent{' '}
+                        <span className="text-gradient-gold">Nos Clients</span>
+                    </h2>
+                    <p className="text-neutral-500 max-w-2xl mx-auto">
+                        Des histoires réelles de nos précieux clients sur leurs expériences transformantes.
+                    </p>
+                </motion.div>
+
+                {/* Testimonial Card */}
+                <div
+                    className="relative max-w-4xl mx-auto"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
+                >
+                    <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-neutral-100">
                         <AnimatePresence mode="wait" custom={direction}>
                             <motion.div
                                 key={activeIndex}
                                 custom={direction}
-                                initial={(direction) => ({
-                                    x: direction > 0 ? 300 : -300,
-                                    opacity: 0,
-                                    scale: 0.95
-                                })}
-                                animate={{
-                                    x: 0,
-                                    opacity: 1,
-                                    scale: 1
-                                }}
-                                exit={(direction) => ({
-                                    x: direction > 0 ? -300 : 300,
-                                    opacity: 0,
-                                    scale: 0.95
-                                })}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
                                 transition={{
                                     x: { type: "spring", stiffness: 300, damping: 30 },
                                     opacity: { duration: 0.3 },
@@ -123,51 +142,60 @@ const Testimonial = () => {
                             >
                                 <div className="flex flex-col md:flex-row gap-8 items-center">
                                     {/* Profile Section */}
-                                    <div className="flex flex-col items-center space-y-4">
-                                        <div className="relative w-32 h-32">
-                                            <Image
-                                                src={testimonials[activeIndex].image}
-                                                alt={testimonials[activeIndex].name}
-                                                fill
-                                                className="rounded-full object-cover border-4 border-white"
-                                            />
-                                            <div className="absolute -bottom-2 -right-2 bg-[#C6934F] rounded-full p-2">
-                                                <Icon icon="solar:verified-check-bold" className="w-6 h-6 text-[#1f1f1f]" />
+                                    <div className="flex flex-col items-center space-y-4 flex-shrink-0">
+                                        <div className="relative">
+                                            <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-[#C6934F]/20 ring-offset-4 ring-offset-white">
+                                                <Image
+                                                    src={currentTestimonial.image}
+                                                    alt={currentTestimonial.name}
+                                                    width={112}
+                                                    height={112}
+                                                    className="rounded-full object-cover w-full h-full"
+                                                />
+                                            </div>
+                                            <div className="absolute -bottom-1 -right-1 bg-gradient-to-br from-[#C6934F] to-[#E8C98A] rounded-full p-1.5 shadow-lg">
+                                                <Icon icon="solar:verified-check-bold" className="w-5 h-5 text-white" />
                                             </div>
                                         </div>
                                         <div className="text-center">
-                                            <h3 className="text-white font-bold text-xl">{testimonials[activeIndex].name}</h3>
-                                            <p className="text-[#C6934F] text-sm">{testimonials[activeIndex].pronoun}</p>
-                                            <p className="text-gray-400 text-sm">{testimonials[activeIndex].location}</p>
+                                            <h3 className="text-neutral-900 font-bold text-lg">{currentTestimonial.name}</h3>
+                                            <p className="text-[#C6934F] text-sm font-medium">{currentTestimonial.location}</p>
                                         </div>
-                                        <div className="flex items-center space-x-1">
-                                            {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
-                                                <Icon key={i} icon="solar:star-bold" className="w-5 h-5 text-[#C6934F]" />
+                                        {/* Rating stars */}
+                                        <div className="flex items-center gap-1">
+                                            {[...Array(currentTestimonial.rating)].map((_, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    initial={{ opacity: 0, scale: 0 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    transition={{ delay: i * 0.1 }}
+                                                >
+                                                    <Icon icon="solar:star-bold" className="w-5 h-5 text-[#E8C98A]" />
+                                                </motion.div>
                                             ))}
                                         </div>
                                     </div>
 
                                     {/* Content Section */}
-                                    <div className="flex-1 space-y-6">
+                                    <div className="flex-1 space-y-4">
                                         <div className="relative">
                                             <Icon
-                                                icon="solar:quote-up-square-bold"
-                                                className="absolute -top-4 -left-4 w-8 h-8 text-[#C6934F] opacity-50"
+                                                icon="solar:quotes-bold"
+                                                className="w-10 h-10 text-[#C6934F]/15 mb-2"
                                             />
-                                            <h4 className="text-[#C6934F] text-2xl font-bold mb-4">
-                                                {testimonials[activeIndex].title}
+                                            <h4 className="text-neutral-900 text-xl md:text-2xl font-bold font-playfair mb-4">
+                                                {currentTestimonial.title}
                                             </h4>
-                                            <p className="text-gray-300 leading-relaxed">
-                                                {testimonials[activeIndex].text}
+                                            <p className="text-neutral-600 leading-relaxed text-base">
+                                                {currentTestimonial.text}
                                             </p>
-                                            <Icon
-                                                icon="solar:quote-down-square-bold"
-                                                className="absolute -bottom-4 -right-4 w-8 h-8 text-[#C6934F] opacity-50"
-                                            />
                                         </div>
-                                        <div className="flex items-center justify-between text-sm text-gray-400">
-                                            <span>{testimonials[activeIndex].serviceType}</span>
-                                            <span>{testimonials[activeIndex].date}</span>
+                                        <div className="flex items-center justify-between text-sm pt-4 border-t border-neutral-100">
+                                            <span className="inline-flex items-center gap-2 px-3 py-1 bg-[#C6934F]/10 text-[#C6934F] rounded-full text-xs font-medium">
+                                                <Icon icon="solar:scissors-bold-duotone" className="w-3.5 h-3.5" />
+                                                {currentTestimonial.serviceType}
+                                            </span>
+                                            <span className="text-neutral-400">{currentTestimonial.date}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -176,44 +204,45 @@ const Testimonial = () => {
                     </div>
 
                     {/* Navigation Buttons */}
-                    <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-5 -right-5 flex justify-between pointer-events-none">
                         <motion.button
                             onClick={handlePrev}
-                            whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.25)" }}
+                            whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-white/10 backdrop-blur-sm text-white p-3 rounded-full transition-all hover:bg-white/20 shadow-lg"
+                            className="pointer-events-auto w-12 h-12 bg-white shadow-xl border border-neutral-100 text-neutral-600 hover:text-[#C6934F] rounded-full flex items-center justify-center transition-all hover:border-[#C6934F]/30"
                         >
-                            <Icon icon="solar:arrow-left-bold" className="w-6 h-6" />
+                            <Icon icon="solar:arrow-left-bold" className="w-5 h-5" />
                         </motion.button>
                         <motion.button
                             onClick={handleNext}
-                            whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.25)" }}
+                            whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-white/10 backdrop-blur-sm text-white p-3 rounded-full transition-all hover:bg-white/20 shadow-lg"
+                            className="pointer-events-auto w-12 h-12 bg-white shadow-xl border border-neutral-100 text-neutral-600 hover:text-[#C6934F] rounded-full flex items-center justify-center transition-all hover:border-[#C6934F]/30"
                         >
-                            <Icon icon="solar:arrow-right-bold" className="w-6 h-6" />
+                            <Icon icon="solar:arrow-right-bold" className="w-5 h-5" />
                         </motion.button>
                     </div>
-                </motion.div>
+                </div>
 
-                {/* Testimonial Indicators */}
-                <div className="flex justify-center space-x-2 mt-8">
+                {/* Indicators */}
+                <div className="flex justify-center items-center gap-2 mt-8">
                     {testimonials.map((_, index) => (
-                        <motion.button
+                        <button
                             key={index}
                             onClick={() => {
                                 setDirection(index > activeIndex ? 1 : -1);
                                 setActiveIndex(index);
                             }}
-                            whileHover={{ scale: 1.2 }}
-                            whileTap={{ scale: 0.9 }}
-                            className={`h-3 rounded-full transition-all ${index === activeIndex ? 'bg-[#C6934F] w-6' : 'bg-[#6e563a]/30 w-3'
-                                }`}
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                                index === activeIndex
+                                    ? 'bg-[#C6934F] w-8'
+                                    : 'bg-neutral-300 w-2 hover:bg-[#C6934F]/50'
+                            }`}
                         />
                     ))}
                 </div>
             </div>
-        </section >
+        </section>
     );
 };
 
