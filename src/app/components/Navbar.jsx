@@ -218,7 +218,7 @@ const Navbar = ({ userType }) => {
               </div>
             ) : (
               <Link
-                href="/auth/choose-login"
+                href="/auth/login"
                 className="px-6 py-2 border-2 border-[#aa9270] text-[#aa9270] rounded-full hover:bg-[#aa9270] hover:text-white transition duration-200"
               >
                 Connexion
@@ -303,7 +303,7 @@ const Navbar = ({ userType }) => {
                     </>
                   ) : (
                     <Link
-                      href="/auth/choose-login"
+                      href="/auth/login"
                       className="text-center border-2 border-[#aa9270] text-[#aa9270] px-4 py-3 rounded-lg hover:bg-[#aa9270] hover:text-white transition duration-200 mt-4"
                     >
                       Connexion

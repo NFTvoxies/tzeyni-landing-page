@@ -119,7 +119,7 @@ const CTA = () => {
                                         <Icon icon="solar:arrow-right-bold" className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
                                     </button>
                                 </Link>
-                                <Link href="/auth/login/professional">
+                                <Link href="/auth/register?role=professional">
                                     <button className="px-8 py-4 bg-transparent border-2 border-white/40 text-white rounded-xl font-bold hover:bg-white/10 hover:border-white/60 transition-all duration-300">
                                         Devenir Professionnel
                                     </button>

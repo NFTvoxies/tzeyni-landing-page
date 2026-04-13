@@ -15,7 +15,7 @@ const isSalonAdminProtectedPath = (pathname) => pathname.startsWith("/salon/") |
 const redirectToLogin = (req) => {
   const callbackUrl = `${req.nextUrl.pathname}${req.nextUrl.search}`;
   const url = req.nextUrl.clone();
-  url.pathname = "/auth/choose-login";
+  url.pathname = "/auth/login";
   url.searchParams.set("callbackUrl", callbackUrl);
   return NextResponse.redirect(url);
 };

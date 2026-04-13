@@ -1,5 +1,5 @@
-import ChooseLoginType from "@/app/components/choose-login";
+import { redirect } from "next/navigation";
 
-export default async function LoginPage() {
-  return <ChooseLoginType/>;
+export default function ChooseLoginPage() {
+  redirect("/auth/login");
 }

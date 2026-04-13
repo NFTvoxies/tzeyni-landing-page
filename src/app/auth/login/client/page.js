@@ -1,6 +1,5 @@
-import Login from "@/app/components/LoginUser";
-
+import { redirect } from "next/navigation";
 
 export default function ClientLoginPage() {
-  return <Login role="client" />;
+  redirect("/auth/login?role=client");
 }
