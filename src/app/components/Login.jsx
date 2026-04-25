@@ -47,6 +47,7 @@ const Login = () => {
   const [role, setRole] = useState(initialRole);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -80,6 +81,8 @@ const Login = () => {
   }, [status, config.dashboardRedirect, router]);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
+    setError("");
     try {
       const result = await signIn("credentials", {
         email: data.email,
@@ -90,12 +93,15 @@ const Login = () => {
 
       if (result?.error) {
         setError(result.error);
+        setIsLoading(false);
       } else if (result.ok) {
+        // Keep spinner on while redirecting
         router.push(config.dashboardRedirect);
       }
     } catch (err) {
       console.error("Login error:", err);
       setError("Une erreur inattendue s'est produite. Veuillez réessayer.");
+      setIsLoading(false);
     }
   };
 
@@ -311,9 +317,20 @@ const Login = () => {
                 {/* Submit */}
                 <Button
                   type="submit"
-                  className="w-full bg-[#C6934F] hover:bg-[#B8854A] text-white font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
+                  disabled={isLoading}
+                  className="w-full bg-[#C6934F] hover:bg-[#B8854A] text-white font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-80 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                  {config.submitLabel}
+                  {isLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Icon
+                        icon="svg-spinners:ring-resize"
+                        className="w-4 h-4 animate-spin"
+                      />
+                      Connexion en cours…
+                    </span>
+                  ) : (
+                    config.submitLabel
+                  )}
                 </Button>
               </form>
 
