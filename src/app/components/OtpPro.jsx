@@ -52,7 +52,7 @@ const OtpPro = () => {
         setRedirectMessage("Redirection vers la page de connexion...");
 
         setTimeout(() => {
-          router.push("/auth/login/professional");
+          router.push("/auth/login?role=professional");
         }, 2000);
       } else {
         toast.error(result.message || "Échec de la vérification de l'OTP. Veuillez réessayer.");
@@ -152,7 +152,7 @@ const OtpPro = () => {
               </span>
             </p>
             <p className="text-sm text-gray-600 mt-2">
-              <Link href="/auth/login" className="text-[#aa9270] hover:underline">
+              <Link href="/auth/login?role=professional" className="text-[#aa9270] hover:underline">
                 Retour à la connexion
               </Link>
             </p>

@@ -78,7 +78,7 @@ const handler = NextAuth({
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/auth/choose-login",
+    signIn: "/auth/login",
   },
   secret: process.env.NEXTAUTH_SECRET || "tzeyni-mock-secret-key-for-development",
   debug: process.env.NODE_ENV === 'development',

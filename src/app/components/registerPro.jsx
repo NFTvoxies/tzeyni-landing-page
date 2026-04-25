@@ -3,19 +3,23 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Controller, useForm } from 'react-hook-form'
+import { EyeIcon, EyeOffIcon, ArrowLeft } from 'lucide-react'
 import { Icon } from '@iconify/react'
 import toast from 'react-hot-toast'
 import { mockRegister } from '@/lib/mockApi'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const Register = () => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
-  const [dictionary, setDictionary] = useState(null)
   const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const { locale } = useParams()
   const router = useRouter()
 
   const {
@@ -39,11 +43,12 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
-      setError("Passwords don't match");
+      setError("Les mots de passe ne correspondent pas");
       return;
     }
 
     setError("");
+    setIsSubmitting(true);
 
     try {
       const result = await mockRegister({
@@ -57,309 +62,357 @@ const Register = () => {
       }, 'professional');
 
       if (result.status) {
-        toast.success("Registration successful! Please verify your email to continue");
-
+        toast.success("Inscription réussie ! Veuillez vérifier votre email.");
         router.push(`/auth/professional/verify-otp?email=${encodeURIComponent(data.email)}`);
       } else {
-        setError(result.message || "Registration failed");
+        setError(result.message || "L'inscription a échoué");
       }
     } catch (error) {
       setError(
-        error.response?.data?.message || "An error occurred during registration"
+        error.response?.data?.message || "Une erreur est survenue lors de l'inscription"
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-
+  const formFields = [
+    {
+      name: 'full_name',
+      label: 'Nom complet*',
+      type: 'text',
+      placeholder: 'Votre nom complet',
+      icon: 'solar:user-bold-duotone',
+      rules: { required: 'Le nom complet est requis' },
+      half: true,
+    },
+    {
+      name: 'gender',
+      label: 'Genre*',
+      type: 'select',
+      placeholder: 'Sélectionner',
+      icon: 'solar:users-group-rounded-bold-duotone',
+      rules: { required: 'Le genre est requis' },
+      options: [
+        { value: '', label: 'Sélectionner le genre' },
+        { value: 'Homme', label: 'Homme' },
+        { value: 'Femme', label: 'Femme' },
+      ],
+      half: true,
+    },
+    {
+      name: 'email',
+      label: 'Adresse email*',
+      type: 'email',
+      placeholder: 'vous@example.com',
+      icon: 'solar:letter-bold-duotone',
+      rules: {
+        required: "L'email est requis",
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: 'Adresse email invalide'
+        }
+      },
+      half: true,
+    },
+    {
+      name: 'phone',
+      label: 'Téléphone*',
+      type: 'tel',
+      placeholder: '+212 6XX XXX XXX',
+      icon: 'solar:phone-bold-duotone',
+      rules: { required: 'Le numéro de téléphone est requis' },
+      half: true,
+    },
+    {
+      name: 'city',
+      label: 'Ville*',
+      type: 'text',
+      placeholder: 'Casablanca',
+      icon: 'solar:map-point-bold-duotone',
+      rules: { required: 'La ville est requise' },
+      half: true,
+    },
+    {
+      name: 'addresse',
+      label: 'Adresse*',
+      type: 'text',
+      placeholder: 'Votre adresse complète',
+      icon: 'solar:home-2-bold-duotone',
+      rules: { required: "L'adresse est requise" },
+      half: true,
+    },
+  ];
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      {/* Left side - Registration Form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 lg:p-16">
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">{dictionary?.title || "Create an Account"}</h1>
-          <p className="text-gray-600 mb-8">{dictionary?.description || "Join our community today"}</p>
+    <div className="min-h-screen flex bg-[#FCF9F5] relative">
+      {/* Back to website link */}
+      <Link href="/" className="absolute top-6 left-6 text-gray-600 hover:text-gray-900 flex items-center gap-2 text-sm z-50 transition-colors duration-300">
+        <ArrowLeft className="h-4 w-4" />
+        Retour au site
+      </Link>
 
-          {error && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6"
-              role="alert"
-            >
-              <p>{error}</p>
-            </motion.div>
-          )}
+      {/* Left side - Decorative Panel */}
+      <div className="hidden lg:flex w-5/12 relative overflow-hidden items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/image/tzeyni header bg.png')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D]/80 via-[#1A1612]/70 to-[#C6934F]/30" />
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <Controller
-              name="full_name"
-              control={control}
-              rules={{ required: 'Full name is required' }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="full_name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    {...field}
-                    type="text"
-                    id="full_name"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.full_name ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    placeholder="John Doe"
-                  />
-                  {errors.full_name && (
-                    <p className="mt-1 text-sm text-red-500">{errors.full_name.message}</p>
-                  )}
-                </div>
-              )}
-            />
+        {/* Decorative floating orbs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-[#C6934F]/15 blur-3xl animate-float" />
+          <div className="absolute bottom-32 left-10 w-60 h-60 rounded-full bg-[#C6934F]/10 blur-3xl animate-float-slow" />
+          {/* Subtle grid */}
+          <div className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+        </div>
 
-            <Controller
-              name="gender"
-              control={control}
-              rules={{ required: 'Gender is required' }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
-                    Gender
-                  </label>
-                  <select
-                    {...field}
-                    id="gender"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.gender ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="Homme">Homme</option>
-                    <option value="Femme">Femme</option>
-                  </select>
-                  {errors.gender && (
-                    <p className="mt-1 text-sm text-red-500">{errors.gender.message}</p>
-                  )}
-                </div>
-              )}
-            />
+        {/* Content overlay */}
+        <div className="relative z-10 text-white px-12 max-w-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-white/90 text-sm font-medium">
+              <Icon icon="solar:star-bold" className="w-4 h-4 text-[#E8C98A]" />
+              Espace Professionnel
+            </span>
 
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address'
-                }
-              }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <div className="relative">
-                    <input
-                      {...field}
-                      type="email"
-                      id="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.email ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      placeholder="you@example.com"
-                    />
-                    <Icon icon="mdi:email" className="absolute right-3 top-2.5 text-gray-400" />
-                  </div>
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-                  )}
-                </div>
-              )}
-            />
+            <h2 className="text-4xl font-bold font-playfair leading-tight">
+              Développez votre <span className="text-gradient-gold">activité</span> avec Tzeyni
+            </h2>
 
-            <Controller
-              name="phone"
-              control={control}
-              rules={{ required: 'Phone number is required' }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    {...field}
-                    type="tel"
-                    id="phone"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.phone ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    placeholder="+1234567890"
-                  />
-                  {errors.phone && (
-                    <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
-                  )}
-                </div>
-              )}
-            />
-
-            <Controller
-              name="city"
-              control={control}
-              rules={{ required: 'City is required' }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-                    City
-                  </label>
-                  <input
-                    {...field}
-                    type="text"
-                    id="city"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.city ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    placeholder="Your City"
-                  />
-                  {errors.city && (
-                    <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>
-                  )}
-                </div>
-              )}
-            />
-
-            <Controller
-              name="addresse"
-              control={control}
-              rules={{ required: 'Address is required' }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="addresse" className="block text-sm font-medium text-gray-700 mb-1">
-                    Address
-                  </label>
-                  <textarea
-                    {...field}
-                    id="addresse"
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.addresse ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    placeholder="Your Address"
-                    rows="3"
-                  ></textarea>
-                  {errors.addresse && (
-                    <p className="mt-1 text-sm text-red-500">{errors.addresse.message}</p>
-                  )}
-                </div>
-              )}
-            />
-
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: 'Password is required', minLength: { value: 8, message: 'Password must be at least 8 characters' } }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      {...field}
-                      type={isPasswordShown ? 'text' : 'password'}
-                      id="password"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.password ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      placeholder="••••••••"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleClickShowPassword}
-                      className="absolute right-3 top-2.5 text-gray-400"
-                    >
-                      <Icon icon={isPasswordShown ? 'mdi:eye-off' : 'mdi:eye'} />
-                    </button>
-                  </div>
-                  {errors.password && (
-                    <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-                  )}
-                </div>
-              )}
-            />
-
-            <Controller
-              name="confirmPassword"
-              control={control}
-              rules={{
-                required: 'Please confirm your password',
-                validate: value => value === control._formValues.password || 'The passwords do not match'
-              }}
-              render={({ field }) => (
-                <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                    Confirm Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      {...field}
-                      type={isPasswordShown ? 'text' : 'password'}
-                      id="confirmPassword"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      placeholder="••••••••"
-                    />
-                  </div>
-                  {errors.confirmPassword && (
-                    <p className="mt-1 text-sm text-red-500">{errors.confirmPassword.message}</p>
-                  )}
-                </div>
-              )}
-            />
-
-            <button
-              type="submit"
-              className="w-full bg-[#aa9270] text-white py-2 px-4 rounded-lg hover:bg-[#aa9270] transition duration-200"
-            >
-              {dictionary?.form?.buttons?.submit || "Register"}
-            </button>
-          </form>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">
-              {dictionary?.links_text || "Already have an account?"}
+            <p className="text-white/70 leading-relaxed">
+              Rejoignez notre réseau de professionnels vérifiés et accédez à une clientèle qualifiée dès aujourd'hui.
             </p>
-            <Link
-              href={`/auth/login/professional`}
-              className="mt-2 inline-block text-[#aa9270] hover:underline"
-            >
-              Login here
-            </Link>
-          </div>
-        </motion.div>
+
+            {/* Benefits list */}
+            <div className="space-y-4 pt-4">
+              {[
+                { icon: 'solar:calendar-bold-duotone', text: 'Gestion de rendez-vous simplifiée' },
+                { icon: 'solar:wallet-bold-duotone', text: 'Paiements sécurisés et rapides' },
+                { icon: 'solar:chart-2-bold-duotone', text: 'Tableau de bord analytique' },
+                { icon: 'solar:users-group-rounded-bold-duotone', text: 'Accès à plus de 1000+ clients' },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <Icon icon={item.icon} className="w-5 h-5 text-[#E8C98A]" />
+                  </div>
+                  <span className="text-white/80 text-sm">{item.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Right side - Image and Pattern */}
-      <div className="hidden lg:block w-1/2 bg-[#aa9270] relative overflow-hidden">
-        <div className="absolute inset-0 bg-opacity-30 z-10"></div>
-        <Image
-          src="/assets/image/tzeyni header bg.png"  // Replace with your actual image path
-          alt="Registration background"
-          fill
-          className="object-cover z-0"
-        />
-        <div className="absolute inset-0 bg-[#aa9270] opacity-20 z-20"></div>
-        <div className="absolute inset-0 z-30">
-          <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path
-              d="M0 0 L50 100 L100 0 Z"
-              fill="rgba(255,255,255,0.1)"
-              stroke="rgba(255,255,255,0.2)"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-40">
-          <h2 className="text-3xl font-bold mb-2">Join Our Community</h2>
-          <p>Create an account to connect, collaborate, and grow with professionals and clients.</p>
-        </div>
+      {/* Right side - Registration Form */}
+      <div className="w-full lg:w-7/12 flex flex-col justify-center items-center p-6 lg:p-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-xl"
+        >
+          <Card className="border-none shadow-md rounded-2xl hover:shadow-lg transition-shadow duration-500">
+            <CardHeader className="space-y-3 pb-4">
+              <Link href="/" className="inline-flex items-center gap-2 group">
+                <span className="font-serif text-2xl font-bold text-foreground">Tzeyni</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[#C6934F]/10 text-[#C6934F] font-medium">Pro</span>
+              </Link>
+
+              <div>
+                <CardTitle className="text-2xl">Créer un compte professionnel</CardTitle>
+                <CardDescription className="text-base mt-1.5">
+                  Inscrivez-vous pour commencer à recevoir des réservations
+                </CardDescription>
+              </div>
+            </CardHeader>
+
+            <CardContent>
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 mb-5 rounded text-sm flex items-center gap-2"
+                >
+                  <Icon icon="solar:danger-triangle-bold" className="w-4 h-4 flex-shrink-0" />
+                  <p>{error}</p>
+                </motion.div>
+              )}
+
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                {/* 2-column grid for form fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {formFields.map((field) => (
+                    <Controller
+                      key={field.name}
+                      name={field.name}
+                      control={control}
+                      rules={field.rules}
+                      render={({ field: formField }) => (
+                        <div className="space-y-1.5">
+                          <Label htmlFor={field.name} className="text-sm text-gray-700 leading-5">
+                            {field.label}
+                          </Label>
+                          {field.type === 'select' ? (
+                            <div className="relative">
+                              <select
+                                {...formField}
+                                id={field.name}
+                                className={`w-full h-10 px-3 rounded-md border text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#C6934F] focus:border-[#C6934F] transition-all duration-300 appearance-none ${
+                                  errors[field.name] ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                              >
+                                {field.options.map((opt) => (
+                                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                ))}
+                              </select>
+                              <Icon icon="solar:alt-arrow-down-linear" className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                            </div>
+                          ) : (
+                            <Input
+                              {...formField}
+                              type={field.type}
+                              id={field.name}
+                              placeholder={field.placeholder}
+                              className={`bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 ${
+                                errors[field.name] ? 'border-red-500' : ''
+                              }`}
+                            />
+                          )}
+                          {errors[field.name] && (
+                            <p className="text-xs text-red-500">{errors[field.name].message}</p>
+                          )}
+                        </div>
+                      )}
+                    />
+                  ))}
+                </div>
+
+                {/* Password fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <Controller
+                    name="password"
+                    control={control}
+                    rules={{
+                      required: 'Le mot de passe est requis',
+                      minLength: { value: 8, message: 'Minimum 8 caractères' }
+                    }}
+                    render={({ field }) => (
+                      <div className="space-y-1.5">
+                        <Label htmlFor="password" className="text-sm text-gray-700 leading-5">
+                          Mot de passe*
+                        </Label>
+                        <div className="relative">
+                          <Input
+                            {...field}
+                            type={isPasswordShown ? 'text' : 'password'}
+                            id="password"
+                            placeholder="••••••••"
+                            className={`bg-white border-gray-300 pr-10 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 ${
+                              errors.password ? 'border-red-500' : ''
+                            }`}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            type="button"
+                            onClick={handleClickShowPassword}
+                            className="absolute inset-y-0 right-0 text-gray-500 hover:text-gray-700 hover:bg-transparent"
+                          >
+                            {isPasswordShown ? <EyeOffIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
+                          </Button>
+                        </div>
+                        {errors.password && (
+                          <p className="text-xs text-red-500">{errors.password.message}</p>
+                        )}
+                      </div>
+                    )}
+                  />
+
+                  <Controller
+                    name="confirmPassword"
+                    control={control}
+                    rules={{
+                      required: 'Veuillez confirmer le mot de passe',
+                      validate: value => value === control._formValues.password || 'Les mots de passe ne correspondent pas'
+                    }}
+                    render={({ field }) => (
+                      <div className="space-y-1.5">
+                        <Label htmlFor="confirmPassword" className="text-sm text-gray-700 leading-5">
+                          Confirmer le mot de passe*
+                        </Label>
+                        <div className="relative">
+                          <Input
+                            {...field}
+                            type={isPasswordShown ? 'text' : 'password'}
+                            id="confirmPassword"
+                            placeholder="••••••••"
+                            className={`bg-white border-gray-300 pr-10 focus:border-[#C6934F] focus:ring-[#C6934F] transition-all duration-300 ${
+                              errors.confirmPassword ? 'border-red-500' : ''
+                            }`}
+                          />
+                        </div>
+                        {errors.confirmPassword && (
+                          <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>
+                        )}
+                      </div>
+                    )}
+                  />
+                </div>
+
+                {/* Terms */}
+                <p className="text-xs text-gray-400 pt-1">
+                  En vous inscrivant, vous acceptez nos{' '}
+                  <Link href="#" className="text-[#C6934F] hover:underline">Conditions d&apos;utilisation</Link>
+                  {' '}et notre{' '}
+                  <Link href="#" className="text-[#C6934F] hover:underline">Politique de confidentialité</Link>.
+                </p>
+
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#C6934F] hover:bg-[#B8854A] text-white font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-60"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <Icon icon="solar:spinner-bold" className="w-4 h-4 animate-spin" />
+                      Inscription en cours...
+                    </span>
+                  ) : (
+                    "Créer mon compte professionnel"
+                  )}
+                </Button>
+              </form>
+
+              {/* Login link */}
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  Vous avez déjà un compte ?{' '}
+                  <Link href="/auth/login/professional" className="text-[#C6934F] font-medium hover:underline transition-all duration-200">
+                    Se connecter
+                  </Link>
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   )

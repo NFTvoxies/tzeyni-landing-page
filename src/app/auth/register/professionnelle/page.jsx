@@ -1,12 +1,5 @@
-import Register from "@/app/components/registerPro";
+import { redirect } from "next/navigation";
 
-
-
-export const metadata = {
-  title: "Register",
-  description: "Register your account",
-};
-
-export default async function LoginPage() {
-  return <Register />;
+export default function RegisterProPage() {
+  redirect("/auth/register?role=professional");
 }

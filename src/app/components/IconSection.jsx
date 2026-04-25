@@ -1,9 +1,8 @@
 'use client'
 
 import { Icon } from "@iconify/react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { Badge } from "@/components/ui/badge";
+import { useInView, useMotionValue, useSpring, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const MotionCounter = ({ value, suffix = "" }) => {
   const ref = useRef(null);
@@ -34,89 +33,129 @@ const MotionCounter = ({ value, suffix = "" }) => {
 const IconSection = () => {
   const features = [
     {
-      icon: "mage:gem-stone",
-      title: "Quality Product",
-      description: "Premium beauty services and products",
-      gradient: "from-[#C6934F] to-[#C6934F]",
+      icon: "solar:crown-bold-duotone",
+      title: "Qualité Premium",
+      description: "Services et produits de beauté certifiés, sélectionnés avec soin",
+      gradient: "from-[#C6934F] to-[#E8C98A]",
     },
     {
-      icon: "bx:bxs-badge-check",
-      title: "Personal Certificate",
-      description: "Certified professional stylists",
-      gradient: "from-[#AA9270] to-[#AA9270]",
+      icon: "solar:verified-check-bold-duotone",
+      title: "Professionnels Certifiés",
+      description: "Chaque styliste est vérifiée et certifiée par notre équipe",
+      gradient: "from-[#B8854A] to-[#D4A574]",
     },
     {
-      icon: "bx:bxs-award",
-      title: "Best Reviews",
-      description: "Highest rated in the country",
-      gradient: "from-[#AA9270] to-[#AA9270]",
+      icon: "solar:star-ring-bold-duotone",
+      title: "Avis Excellents",
+      description: "Les mieux notées du pays avec 4.9/5 de moyenne",
+      gradient: "from-[#9A6F3A] to-[#C6934F]",
     },
   ];
 
+  const stats = [
+    { label: "Clients Satisfaits", value: 1000, suffix: "+", icon: "solar:users-group-rounded-bold-duotone" },
+    { label: "Stylistes Experts", value: 50, suffix: "+", icon: "solar:star-shine-bold-duotone" },
+    { label: "Services Disponibles", value: 100, suffix: "+", icon: "solar:clipboard-list-bold-duotone" },
+    { label: "Ans d'Expérience", value: 5, suffix: "+", icon: "solar:medal-ribbons-star-bold-duotone" },
+  ];
+
   return (
-    <section className="relative bg-gradient-to-r from-zinc-900 via-zinc-950 to-stone-950 py-16 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OC0xNCAxNC0xNHMxNCA2LjI2OCAxNCAxNHMtNi4yNjggMTQtMTQgMTR6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz48L2c+PC9zdmc+')] opacity-20" />
+    <section className="relative bg-gradient-to-b from-[#0D0D0D] via-[#141414] to-[#1A1A1A] py-24 overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#C6934F]/8 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#C6934F]/5 rounded-full blur-3xl" />
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: '48px 48px',
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header with Badge */}
-        <div className="text-center mb-12">
-          <Badge className="mx-auto bg-[#C6934F] hover:bg-[#C6934F] text-white mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-gold text-[#E8C98A] text-sm font-medium mb-6">
+            <Icon icon="solar:star-bold" className="w-4 h-4" />
             Nos Atouts
-          </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Pourquoi Choisir Tzeyni</h2>
-        </div>
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white font-playfair mb-4">
+            Pourquoi Choisir{' '}
+            <span className="text-gradient-gold">Tzeyni</span>
+          </h2>
+          <p className="text-white/50 max-w-xl mx-auto">
+            L'excellence au service de votre beauté, chaque jour
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Feature cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 transition-all duration-300 hover:transform hover:scale-105 hover:bg-white/20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15, duration: 0.5 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group relative"
             >
-              <div className="flex flex-col items-center text-center space-y-4">
-                {/* Icon Container */}
-                <div
-                  className={`p-3 rounded-xl bg-gradient-to-r ${feature.gradient} transform transition-transform duration-300 group-hover:scale-110 shadow-lg`}
-                >
-                  <Icon icon={feature.icon} className="w-8 h-8 text-white" />
-                </div>
+              <div className="relative glass rounded-2xl p-8 h-full transition-all duration-500 hover:border-[#C6934F]/30 hover:bg-white/[0.06]">
+                {/* Glow on hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#C6934F]/0 to-[#C6934F]/0 group-hover:from-[#C6934F]/5 group-hover:to-transparent transition-all duration-500" />
 
-                {/* Text Content */}
-                <div className="space-y-2">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-white/90 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-white/80 text-sm group-hover:text-white/90 transition-colors duration-300">
-                    {feature.description}
-                  </p>
-                </div>
+                <div className="relative z-10 flex flex-col items-center text-center space-y-5">
+                  {/* Icon Container with animated border */}
+                  <div className="relative">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg group-hover:shadow-glow transition-all duration-500`}>
+                      <Icon icon={feature.icon} className="w-8 h-8 text-white" />
+                    </div>
+                    {/* Ping effect on hover */}
+                    <div className="absolute inset-0 rounded-2xl bg-[#C6934F]/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity" />
+                  </div>
 
-                {/* Decorative Elements */}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#E8C98A] transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Additional Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-white/90">
-          {[
-            { label: "Happy Clients", value: 1000, suffix: "+" },
-            { label: "Expert Stylists", value: 50, suffix: "+" },
-            { label: "Services", value: 100, suffix: "+" },
-            { label: "Years Experience", value: 5, suffix: "+" },
-          ].map((stat, index) => (
-            <div
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((stat, index) => (
+            <motion.div
               key={index}
-              className="p-4 rounded-lg bg-white/5 backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              className="group relative glass-gold rounded-2xl p-6 text-center transition-all duration-300 cursor-default hover:border-[#C6934F]/40"
             >
-              <div className="text-2xl font-bold">
+              <div className="flex justify-center mb-3">
+                <Icon icon={stat.icon} className="w-6 h-6 text-[#C6934F] group-hover:text-[#E8C98A] transition-colors" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">
                 <MotionCounter value={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-sm text-white/70">{stat.label}</div>
-            </div>
+              <div className="text-sm text-white/50 group-hover:text-white/70 transition-colors">{stat.label}</div>
+            </motion.div>
           ))}
         </div>
       </div>

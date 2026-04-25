@@ -1,6 +1,7 @@
 // src/app/layout.js
 
 import localFont from "next/font/local";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import SessionProviderWrapper from "./components/SessionProviderWrapper";
@@ -19,6 +20,13 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
 export const metadata = {
   title: "Tzeyni - Professional Services Marketplace",
   description: "Connect with top professionals for your needs on Tzeyni.",
@@ -26,7 +34,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`}>
       {/* <head>
         <link rel="shortcut icon" type="image/x-icon" href="/test.ico" />
       </head> */}

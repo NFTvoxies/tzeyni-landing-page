@@ -1,12 +1,5 @@
-import RegisterClient from "@/app/components/registerClient";
+import { redirect } from "next/navigation";
 
-
-
-export const metadata = {
-  title: "Register",
-  description: "Register your account",
-};
-
-export default async function LoginPage() {
-  return <RegisterClient />;
+export default function RegisterClientPage() {
+  redirect("/auth/register?role=client");
 }

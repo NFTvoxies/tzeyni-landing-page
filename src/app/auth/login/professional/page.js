@@ -1,5 +1,5 @@
-import LoginPro from "@/app/components/LoginPro";
+import { redirect } from "next/navigation";
 
 export default function ProfessionalLoginPage() {
-  return <LoginPro />;
+  redirect("/auth/login?role=professional");
 }
